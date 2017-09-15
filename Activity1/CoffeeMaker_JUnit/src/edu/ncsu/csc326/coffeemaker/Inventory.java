@@ -18,6 +18,7 @@ public class Inventory {
      * Creates a coffee maker inventory object and
      * fills each item in the inventory with 15 units.
      */
+    //Nathan
     public Inventory() {
     	setCoffee(15);
     	setMilk(15);
@@ -30,6 +31,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
+    //Nathan
     public int getChocolate() {
         return chocolate;
     }
@@ -39,6 +41,7 @@ public class Inventory {
      * to the specified amount.
      * @param chocolate
      */
+    //Nathan
     public synchronized void setChocolate(int chocolate) {
     	if(chocolate >= 0) {
     		Inventory.chocolate = chocolate;
@@ -52,6 +55,7 @@ public class Inventory {
      * @param chocolate
      * @throws InventoryException
      */
+    //Nathan
     public synchronized void addChocolate(String chocolate) throws InventoryException {
     	int amtChocolate = 0;
     	try {
@@ -71,6 +75,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
+    //Nathan
     public int getCoffee() {
         return coffee;
     }
@@ -80,6 +85,7 @@ public class Inventory {
      * to the specified amount.
      * @param coffee
      */
+    //Nathan
     public synchronized void setCoffee(int coffee) {
     	if(coffee >= 0) {
     		Inventory.coffee = coffee;
@@ -92,6 +98,7 @@ public class Inventory {
      * @param coffee
      * @throws InventoryException
      */
+    //Nathan
     public synchronized void addCoffee(String coffee) throws InventoryException {
     	int amtCoffee = 0;
     	try {
@@ -111,6 +118,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
+    //Nathan
     public int getMilk() {
         return milk;
     }
@@ -120,6 +128,7 @@ public class Inventory {
      * to the specified amount.
      * @param milk
      */
+    //Nathan
     public synchronized void setMilk(int milk) {
     	if(milk >= 0) {
     		Inventory.milk = milk;
@@ -132,6 +141,7 @@ public class Inventory {
      * @param milk
      * @throws InventoryException
      */
+    //Nathan
     public synchronized void addMilk(String milk) throws InventoryException {
     	int amtMilk = 0;
     	try {
@@ -151,6 +161,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
+    //Nathan
     public int getSugar() {
         return sugar;
     }

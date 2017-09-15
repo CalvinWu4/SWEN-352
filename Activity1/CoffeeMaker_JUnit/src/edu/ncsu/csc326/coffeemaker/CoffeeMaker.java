@@ -15,6 +15,7 @@ public class CoffeeMaker {
      * Constructor for the coffee maker
      *
      */
+    //Nathan
 	public CoffeeMaker() {
 	    recipeBook = new RecipeBook();
 		inventory = new Inventory();
@@ -27,6 +28,7 @@ public class CoffeeMaker {
 	 * @param r
 	 * @return boolean
 	 */
+	//Nathan
 	public boolean addRecipe(Recipe r) {
 		return recipeBook.addRecipe(r);
 	}
@@ -38,6 +40,7 @@ public class CoffeeMaker {
 	 * @param recipeToDelete
 	 * @return String
 	 */
+	//Nathan
 	public String deleteRecipe(int recipeToDelete) {
 		return recipeBook.deleteRecipe(recipeToDelete);
 	}
@@ -49,6 +52,7 @@ public class CoffeeMaker {
 	 * @param r
 	 * @return String
 	 */
+	//Nathan
 	public String editRecipe(int recipeToEdit, Recipe r) {
 		return recipeBook.editRecipe(recipeToEdit, r);
 	}
@@ -61,6 +65,7 @@ public class CoffeeMaker {
      * @param amtChocolate
      * @return boolean
      */
+	//Nathan
     public synchronized void addInventory(String amtCoffee, String amtMilk, String amtSugar, String amtChocolate) throws InventoryException {
 	    inventory.addCoffee(amtCoffee);
 	    inventory.addMilk(amtMilk);
@@ -72,6 +77,7 @@ public class CoffeeMaker {
      * Returns the inventory of the coffee maker
      * @return Inventory
      */
+    //Nathan
     public synchronized String checkInventory() {
         return inventory.toString();
     }
@@ -83,6 +89,7 @@ public class CoffeeMaker {
      * @param amtPaid
      * @return int
      */
+    //Nathan
     public synchronized int makeCoffee(int recipeToPurchase, int amtPaid) {
         int change = 0;
         
@@ -105,6 +112,7 @@ public class CoffeeMaker {
 	 * Returns the list of Recipes in the RecipeBook.
 	 * @return Recipe []
 	 */
+    //Nathan
 	public synchronized Recipe[] getRecipes() {
 		return recipeBook.getRecipes();
 	}
