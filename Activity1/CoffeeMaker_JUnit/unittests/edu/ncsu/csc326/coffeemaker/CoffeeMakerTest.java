@@ -59,6 +59,18 @@ public class CoffeeMakerTest extends TestCase {
 		super.setUp();
 	}
 	
+	public void testAddRecipe() {
+		fail("Not yet implemented");
+	}
+	
+	public void testDeleteRecipe() {
+		fail("Not yet implemented");
+	}
+	
+	public void testEditRecipe() {
+		fail("Not yet implemented");
+	}
+	
 	public void testAddInventory() {
 		try {
 			cm.addInventory("4","7","0","9");
@@ -76,9 +88,17 @@ public class CoffeeMakerTest extends TestCase {
 		}
 	}
 	
+	public void testCheckInventory() {
+		fail("Not yet implemented");
+	}
+	
 	public void testMakeCoffee() {
 		cm.addRecipe(r1);
 		assertEquals(25, cm.makeCoffee(0, 75));
+	}
+	
+	public void testGetRecipes() {
+		fail("Not yet implemented");
 	}
 
 }
