@@ -171,6 +171,7 @@ public class Inventory {
      * to the specified amount.
      * @param sugar
      */
+  //Javis
     public synchronized void setSugar(int sugar) {
     	if(sugar >= 0) {
     		Inventory.sugar = sugar;
@@ -183,6 +184,7 @@ public class Inventory {
      * @param sugar
      * @throws InventoryException
      */
+  //Javis
     public synchronized void addSugar(String sugar) throws InventoryException {
     	int amtSugar = 0;
     	try {
@@ -203,6 +205,7 @@ public class Inventory {
      * @param r
      * @return boolean
      */
+  //Javis
     protected synchronized boolean enoughIngredients(Recipe r) {
         boolean isEnough = true;
         if(Inventory.coffee < r.getAmtCoffee()) {
@@ -226,6 +229,7 @@ public class Inventory {
      * are enough ingredients to make 
      * @param r
      */
+  //Javis
     public synchronized boolean useIngredients(Recipe r) {
     	if (enoughIngredients(r)) {
 	    	Inventory.coffee += r.getAmtCoffee();
@@ -243,6 +247,7 @@ public class Inventory {
      * of the inventory.
      * @return String
      */
+  //Javis
     public String toString() {
     	StringBuffer buf = new StringBuffer();
     	buf.append("Coffee: ");

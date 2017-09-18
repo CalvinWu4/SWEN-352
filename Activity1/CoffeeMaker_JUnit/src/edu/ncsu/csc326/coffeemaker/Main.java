@@ -20,6 +20,7 @@ public class Main {
      * Prints the main menu and handles user input for 
      * main menu commands.
      */
+  //Javis
     public static void mainMenu() {
         System.out.println("1. Add a recipe");
         System.out.println("2. Delete a recipe");
@@ -54,6 +55,7 @@ public class Main {
     /**
      * The add recipe user interface that process user input.
      */
+  //Javis
 	public static void addRecipe() {
 		
 	    //Read in recipe name
@@ -100,6 +102,7 @@ public class Main {
 	/**
 	 * Delete recipe user interface that processes input.
 	 */
+	//Javis
     public static void deleteRecipe() {
         Recipe [] recipes = coffeeMaker.getRecipes();
         for(int i = 0; i < recipes.length; i++) {
@@ -126,6 +129,7 @@ public class Main {
     /**
      * Edit recipe user interface the processes user input.
      */
+  //Javis
     public static void editRecipe() {
         Recipe [] recipes = coffeeMaker.getRecipes();
         for(int i = 0; i < recipes.length; i++) {
@@ -180,6 +184,7 @@ public class Main {
     /**
      * Add inventory user interface that processes input.
      */
+  //Javis
     public static void addInventory() {
 	    //Read in amt coffee
 	    String coffeeString = inputOutput("\nPlease enter the units of coffee to add: ");
@@ -206,6 +211,7 @@ public class Main {
     /**
      * Check inventory user interface that processes input.
      */
+  //Javis
     public static void checkInventory() {
     	System.out.println(coffeeMaker.checkInventory());
     	mainMenu();
@@ -214,6 +220,7 @@ public class Main {
     /**
      * Make coffee user interface the processes input.
      */
+  //Javis
     public static void makeCoffee() {
         Recipe [] recipes = coffeeMaker.getRecipes();
         for(int i = 0; i < recipes.length; i++) {
@@ -250,6 +257,7 @@ public class Main {
      * @param message
      * @return String
      */
+  //Javis
     private static String inputOutput(String message) {
         System.out.println(message);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -270,6 +278,7 @@ public class Main {
      * @param message
      * @return int
      */
+  //Javis
     private static int recipeListSelection(String message) {
     	String userSelection = inputOutput(message);
     	int recipe = 0;
@@ -291,6 +300,7 @@ public class Main {
      * Starts the coffee maker program.
      * @param args
      */
+  //Javis
     public static void main(String[] args) {
 	    coffeeMaker = new CoffeeMaker();
 	    System.out.println("Welcome to the CoffeeMaker!\n");

@@ -16,6 +16,7 @@ public class Recipe {
     /**
      * Creates a default recipe for the coffee maker.
      */
+  //Javis
     public Recipe() {
     	this.name = "";
     	this.price = 0;
@@ -28,12 +29,14 @@ public class Recipe {
     /**
 	 * @return   Returns the amtChocolate.
 	 */
+  //Javis
     public int getAmtChocolate() {
 		return amtChocolate;
 	}
     /**
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
+  //Javis
     public void setAmtChocolate(String chocolate) throws RecipeException {
     	int amtChocolate = 0;
     	try {
@@ -48,8 +51,9 @@ public class Recipe {
 		}
 	}
     /**
-	 * @return   Returns the amtCoffee.
+	 * @return   Returns the amtCoffee. Changes made
 	 */
+  //Javis
     public int getAmtCoffee() {
 		return amtCoffee;
 	}
