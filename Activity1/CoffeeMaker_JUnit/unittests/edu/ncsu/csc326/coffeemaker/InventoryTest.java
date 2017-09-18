@@ -3,21 +3,37 @@ package edu.ncsu.csc326.coffeemaker;
 import junit.framework.TestCase;
 
 public class InventoryTest extends TestCase {
+	
+	private Inventory inventory;
+	private int default_amount;
 
 	protected void setUp() throws Exception {
+		inventory = new Inventory();
+		default_amount = 15;
 		super.setUp();
 	}
 
 	public void testInventory() {
-		fail("Not yet implemented");
+		assertNotNull(inventory);
+		assertEquals(default_amount,inventory.getCoffee());
+		assertEquals(default_amount,inventory.getMilk());
+		assertEquals(default_amount,inventory.getSugar());
+		assertEquals(default_amount,inventory.getChocolate());
 	}
 
 	public void testGetChocolate() {
-		fail("Not yet implemented");
+		assertEquals("The inventory did not start with the default amount of chocolate.",default_amount,inventory.getChocolate());
+		int new_amount = 10;
+		inventory.setChocolate(new_amount);
+		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
+		assertFalse("The amount of chocoalte in the inventory did not change.",inventory.getChocolate() == default_amount);
 	}
 
 	public void testSetChocolate() {
-		fail("Not yet implemented");
+		int new_amount = 10;
+		inventory.setChocolate(new_amount);
+		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
+		assertFalse("The amount of chocoalte in the inventory did not change.",inventory.getChocolate() == default_amount);
 	}
 
 	public void testAddChocolate() {
