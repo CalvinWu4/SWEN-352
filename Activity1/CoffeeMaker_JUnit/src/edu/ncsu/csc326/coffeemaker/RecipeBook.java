@@ -10,6 +10,7 @@ public class RecipeBook {
 	/**
 	 * Default constructor for a RecipeBook.
 	 */
+	//Calvin
 	public RecipeBook() {
 		recipeArray = new Recipe[NUM_RECIPES];
 	}
@@ -19,10 +20,11 @@ public class RecipeBook {
 	 * @param r
 	 * @return Recipe[]
 	 */
+	//Calvin
 	public synchronized Recipe[] getRecipes() {
 		return recipeArray;
 	}
-	
+	//Calvin
 	public synchronized boolean addRecipe(Recipe r) {
 		//Assume recipe doesn't exist in the array until 
 		//find out otherwise
@@ -54,6 +56,7 @@ public class RecipeBook {
 	 * @param recipeToDelete
 	 * @return String
 	 */
+	//Calvin
 	public synchronized String deleteRecipe(int recipeToDelete) {
 		if (recipeArray[recipeToDelete] != null) {
 			String recipeName = recipeArray[recipeToDelete].getName();
@@ -71,6 +74,7 @@ public class RecipeBook {
 	 * @param newRecipe
 	 * @return String
 	 */
+	//Calvin
 	public synchronized String editRecipe(int recipeToEdit, Recipe newRecipe) {
 		if (recipeArray[recipeToEdit] != null) {
 			String recipeName = recipeArray[recipeToEdit].getName();

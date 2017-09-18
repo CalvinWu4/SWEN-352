@@ -184,7 +184,7 @@ public class Main {
     /**
      * Add inventory user interface that processes input.
      */
-  //Javis
+  //Rannon
     public static void addInventory() {
 	    //Read in amt coffee
 	    String coffeeString = inputOutput("\nPlease enter the units of coffee to add: ");
@@ -211,7 +211,7 @@ public class Main {
     /**
      * Check inventory user interface that processes input.
      */
-  //Javis
+  //Rannon
     public static void checkInventory() {
     	System.out.println(coffeeMaker.checkInventory());
     	mainMenu();
@@ -220,7 +220,7 @@ public class Main {
     /**
      * Make coffee user interface the processes input.
      */
-  //Javis
+  //Rannon
     public static void makeCoffee() {
         Recipe [] recipes = coffeeMaker.getRecipes();
         for(int i = 0; i < recipes.length; i++) {
@@ -257,7 +257,7 @@ public class Main {
      * @param message
      * @return String
      */
-  //Javis
+  //Rannon
     private static String inputOutput(String message) {
         System.out.println(message);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -278,7 +278,7 @@ public class Main {
      * @param message
      * @return int
      */
-  //Javis
+  //Rannon
     private static int recipeListSelection(String message) {
     	String userSelection = inputOutput(message);
     	int recipe = 0;
@@ -300,7 +300,7 @@ public class Main {
      * Starts the coffee maker program.
      * @param args
      */
-  //Javis
+  //Rannon
     public static void main(String[] args) {
 	    coffeeMaker = new CoffeeMaker();
 	    System.out.println("Welcome to the CoffeeMaker!\n");

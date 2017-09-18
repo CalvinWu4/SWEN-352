@@ -98,7 +98,7 @@ public class Inventory {
      * @param coffee
      * @throws InventoryException
      */
-    //Nathan
+    //Javis
     public synchronized void addCoffee(String coffee) throws InventoryException {
     	int amtCoffee = 0;
     	try {
@@ -118,7 +118,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
-    //Nathan
+    //Javis
     public int getMilk() {
         return milk;
     }
@@ -128,7 +128,7 @@ public class Inventory {
      * to the specified amount.
      * @param milk
      */
-    //Nathan
+  //Javis
     public synchronized void setMilk(int milk) {
     	if(milk >= 0) {
     		Inventory.milk = milk;
@@ -141,7 +141,7 @@ public class Inventory {
      * @param milk
      * @throws InventoryException
      */
-    //Nathan
+  //Javis
     public synchronized void addMilk(String milk) throws InventoryException {
     	int amtMilk = 0;
     	try {
@@ -161,7 +161,7 @@ public class Inventory {
      * the inventory.
      * @return int
      */
-    //Nathan
+  //Javis
     public int getSugar() {
         return sugar;
     }

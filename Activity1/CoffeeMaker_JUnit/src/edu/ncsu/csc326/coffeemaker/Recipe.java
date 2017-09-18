@@ -16,7 +16,7 @@ public class Recipe {
     /**
      * Creates a default recipe for the coffee maker.
      */
-  //Javis
+  //Rannon
     public Recipe() {
     	this.name = "";
     	this.price = 0;
@@ -29,14 +29,14 @@ public class Recipe {
     /**
 	 * @return   Returns the amtChocolate.
 	 */
-  //Javis
+  //Rannon
     public int getAmtChocolate() {
 		return amtChocolate;
 	}
     /**
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
-  //Javis
+  //Rannon
     public void setAmtChocolate(String chocolate) throws RecipeException {
     	int amtChocolate = 0;
     	try {
@@ -53,13 +53,14 @@ public class Recipe {
     /**
 	 * @return   Returns the amtCoffee. Changes made
 	 */
-  //Javis
+  //Rannon
     public int getAmtCoffee() {
 		return amtCoffee;
 	}
     /**
 	 * @param amtCoffee   The amtCoffee to set.
 	 */
+    //Rannon
     public void setAmtCoffee(String coffee) throws RecipeException {
     	int amtCoffee = 0;
     	try {
@@ -76,12 +77,14 @@ public class Recipe {
     /**
 	 * @return   Returns the amtMilk.
 	 */
+  //Rannon
     public int getAmtMilk() {
 		return amtMilk;
 	}
     /**
 	 * @param amtMilk   The amtMilk to set.
 	 */
+    //Rannon
     public void setAmtMilk(String milk) throws RecipeException{
     	int amtMilk = 0;
     	try {
@@ -98,12 +101,14 @@ public class Recipe {
     /**
 	 * @return   Returns the amtSugar.
 	 */
+  //Rannon
     public int getAmtSugar() {
 		return amtSugar;
 	}
     /**
 	 * @param amtSugar   The amtSugar to set.
 	 */
+    //Calvin
     public void setAmtSugar(String sugar) throws RecipeException {
     	int amtSugar = 0;
     	try {
@@ -120,12 +125,14 @@ public class Recipe {
     /**
 	 * @return   Returns the name.
 	 */
+  //Calvin
     public String getName() {
 		return name;
 	}
     /**
 	 * @param name   The name to set.
 	 */
+  //Calvin
     public void setName(String name) {
     	if(name != null) {
     		this.name = name;
@@ -134,12 +141,14 @@ public class Recipe {
     /**
 	 * @return   Returns the price.
 	 */
+  //Calvin
     public int getPrice() {
 		return price;
 	}
     /**
 	 * @param price   The price to set.
 	 */
+  //Calvin
     public void setPrice(String price) throws RecipeException{
     	int amtPrice = 0;
     	try {
@@ -158,10 +167,12 @@ public class Recipe {
      * Returns the name of the recipe.
      * @return String
      */
+  //Calvin
     public String toString() {
     	return name;
     }
-
+    
+  //Calvin
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -169,7 +180,8 @@ public class Recipe {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
+	
+  //Calvin
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
