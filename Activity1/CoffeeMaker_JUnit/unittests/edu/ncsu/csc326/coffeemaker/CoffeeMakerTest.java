@@ -60,15 +60,58 @@ public class CoffeeMakerTest extends TestCase {
 	}
 	
 	public void testAddRecipe() {
-		fail("Not yet implemented");
+		Recipe temp;
+		boolean contains = false;
+		cm.addRecipe(r1);
+		Recipe[] array = cm.getRecipes();
+		for (int i = 0; i < array.length; i++) {
+			temp = array[i];
+			if (r1 == temp) {
+				contains = true;
+			}
+		}
+		assertTrue(contains);
 	}
 	
 	public void testDeleteRecipe() {
-		fail("Not yet implemented");
+		Recipe temp;
+		boolean contains = false;
+
+		cm.addRecipe(r1);
+		Recipe[] array_added = cm.getRecipes();
+		
+		for (Recipe recipe : array_added) {
+			if (recipe == null || recipe.getName() == "") {
+				continue;
+			}
+			else	
+			{
+				contains = true;
+			}
+		}
+		assertTrue(contains);
+		contains = false;
+		String name = cm.deleteRecipe(0);
+		Recipe[] array_deleted = cm.getRecipes();
+		for (Recipe recipe : array_added) {
+			if (recipe != null && recipe.getName() != "") {
+				contains = true;
+			}
+		}
+		assertFalse(contains);
+		assertTrue(r1.getName().equals(name));
+		
+		assertNull(cm.deleteRecipe(1));
+		assertEquals("", cm.deleteRecipe(0)); //TODO This recipe was already deleted. Should it be null instead of ""?
 	}
 	
 	public void testEditRecipe() {
-		fail("Not yet implemented");
+		cm.addRecipe(r1);
+		String name = cm.editRecipe(0, r2);
+		assertEquals("",r1.getName(),name);
+		Recipe[] arr = cm.getRecipes();
+		Recipe temp = arr[0];
+		assertEquals(r2.getName(), temp.getName());
 	}
 	
 	public void testAddInventory() {
