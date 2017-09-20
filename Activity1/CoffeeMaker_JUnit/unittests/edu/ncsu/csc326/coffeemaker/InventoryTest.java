@@ -1,5 +1,6 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import junit.framework.TestCase;
 
 public class InventoryTest extends TestCase {
@@ -26,26 +27,55 @@ public class InventoryTest extends TestCase {
 		int new_amount = 10;
 		inventory.setChocolate(new_amount);
 		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
-		assertFalse("The amount of chocoalte in the inventory did not change.",inventory.getChocolate() == default_amount);
 	}
 
 	public void testSetChocolate() {
+		//Test with positive number
 		int new_amount = 10;
 		inventory.setChocolate(new_amount);
 		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
-		assertFalse("The amount of chocoalte in the inventory did not change.",inventory.getChocolate() == default_amount);
+		//Reset the amount of chocolate
+		inventory.setChocolate(default_amount); 
+		//Test with negative number.
+		int negative_amount = -1;
+		inventory.setChocolate(negative_amount);
+		assertEquals("",default_amount, inventory.getChocolate());
+		
 	}
 
 	public void testAddChocolate() {
-		fail("Not yet implemented");
+		int add = 10;
+		inventory.setChocolate(default_amount);
+		boolean NanFlag = false;
+		boolean NegFlag = false;
+		try {
+			inventory.addChocolate(String.valueOf(add));
+			inventory.addChocolate("a");
+		} catch (InventoryException e) {
+			NanFlag = true; //Signal it reached here.
+		}
+		assertEquals("",default_amount + add, inventory.getChocolate());
+		String neg = "-1";
+		try {
+			inventory.addChocolate(neg);
+		}
+		catch (InventoryException e) {
+			NegFlag = true;
+		}
+		assertTrue(NanFlag);
+		assertTrue(NegFlag);
 	}
 
 	public void testGetCoffee() {
-		fail("Not yet implemented");
+		assertEquals("Incorrect amount of coffee.", default_amount, inventory.getCoffee());
 	}
 
 	public void testSetCoffee() {
-		fail("Not yet implemented");
+		int new_amount = 10;
+		inventory.setCoffee(new_amount);
+		assertEquals("Amount of coffee not set correctly.", new_amount, inventory.getCoffee());
+		inventory.setCoffee(-1);
+		assertEquals("Negative amount of coffee set.", new_amount, inventory.getCoffee());
 	}
 
 	public void testAddCoffee() {
