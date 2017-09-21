@@ -70,7 +70,7 @@ public class CoffeeMakerTest extends TestCase {
 				contains = true;
 			}
 		}
-		assertTrue(contains);
+		assertTrue("Recipe not added.",contains);
 	}
 	
 	public void testDeleteRecipe() {
@@ -89,20 +89,21 @@ public class CoffeeMakerTest extends TestCase {
 				contains = true;
 			}
 		}
-		assertTrue(contains);
+		assertTrue("Recipe not added corectly.",contains);
 		contains = false;
 		String name = cm.deleteRecipe(0);
 		Recipe[] array_deleted = cm.getRecipes();
-		for (Recipe recipe : array_added) {
+		for (Recipe recipe : array_deleted) {
 			if (recipe != null && recipe.getName() != "") {
 				contains = true;
 			}
 		}
-		assertFalse(contains);
-		assertTrue(r1.getName().equals(name));
+		assertFalse("Recipe was not deleted.",contains);
+		assertTrue("Wrong name returned while deleting recipe.",r1.getName().equals(name));
 		
-		assertNull(cm.deleteRecipe(1));
-		assertEquals("", cm.deleteRecipe(0)); //TODO This recipe was already deleted. Should it be null instead of ""?
+		assertNull("Null was not returned while deleting a recipe that did not exist.",cm.deleteRecipe(1));
+		assertEquals("Incorrect return value while deleting a recipe that was already deleted.",
+				"", cm.deleteRecipe(0)); //TODO This recipe was already deleted. Should it be null instead of ""?
 	}
 	
 	public void testEditRecipe() {
@@ -121,7 +122,7 @@ public class CoffeeMakerTest extends TestCase {
 		} catch (InventoryException e) {
 			exceptionFlag = false;
 		}
-		assertTrue(exceptionFlag);
+		assertTrue("Exception thrown while adding valid numbers of ingedients.",exceptionFlag);
 	}
 	
 	public void testAddInventoryException() {
@@ -131,7 +132,7 @@ public class CoffeeMakerTest extends TestCase {
 		} catch (InventoryException e) {
 			exceptionFlag = true;
 		}
-		assertTrue(exceptionFlag);
+		assertTrue("Exception not thrown while adding invalid number of ingedients.",exceptionFlag);
 	}
 	
 	public void testCheckInventory() {
@@ -139,26 +140,28 @@ public class CoffeeMakerTest extends TestCase {
 		try {
 			cm.addInventory("2", "2", "2", "2"); //TODO Believes sugar is not positive. Definitely is.
 		} catch (InventoryException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			assertTrue("Excpetion was thrown and should not have been.",false);
 		}
-		assertEquals("","Coffee: 17\nMilk: 17\nSugar: 17\nChocolate: 17\n",cm.checkInventory());
+		assertEquals("Amount of ingedient was not correctly added to the inventory.",
+				"Coffee: 17\nMilk: 17\nSugar: 17\nChocolate: 17\n",cm.checkInventory());
 	}
 	
 	public void testMakeCoffee() {
 		cm.addRecipe(r1);
 		//Successful Transaction
-		assertEquals(25, cm.makeCoffee(0, 75));
+		assertEquals("Successful transaction was not completed.",25, cm.makeCoffee(0, 75));
 		//User doesn't pay with enough money for a recipe.
-		assertEquals(1,cm.makeCoffee(0, 1));
+		assertEquals("User was able to pay with not enough money.",1,cm.makeCoffee(0, 1));
 		//User tries to pay for a recipe that was deleted.
 		cm.deleteRecipe(0);
-		assertEquals(75,cm.makeCoffee(0, 75));
+		assertEquals("User was able to pay for deleted recipe.",75,cm.makeCoffee(0, 75));
 		//User tries to pay for a recipe that never existed.
-		assertEquals(75,cm.makeCoffee(1, 75));
+		assertEquals("User was able to pay for a recipe that doens't exist.",75,cm.makeCoffee(1, 75));
 		cm.addRecipe(r2);
 		//User attempts to pay, but not enough chocolate to make Mocha.
-		assertEquals(75, cm.makeCoffee(1, 75));
+		assertEquals("User was able to pay when there wasn't enough chocolate to make the mocha.",
+				75, cm.makeCoffee(1, 75));
 	}
 	
 	public void testGetRecipes() {
@@ -169,7 +172,7 @@ public class CoffeeMakerTest extends TestCase {
 				recipeExists = true;
 			}
 		}
-		assertFalse(recipeExists);
+		assertFalse("Recipe exists before any were added.",recipeExists);
 		//Add a recipe and confirm it's gotten.
 		cm.addRecipe(r1);
 		boolean recipe1Exists = false;
@@ -180,7 +183,7 @@ public class CoffeeMakerTest extends TestCase {
 				}
 			}
 		}
-		assertTrue(recipe1Exists);
+		assertTrue("Recipe was not added.",recipe1Exists);
 		recipe1Exists = false;
 		boolean recipe2Exists = false;
 		cm.addRecipe(r2);
@@ -194,8 +197,8 @@ public class CoffeeMakerTest extends TestCase {
 				}
 			}
 		}
-		assertTrue(recipe1Exists);
-		assertTrue(recipe2Exists);
+		assertTrue("Recipe that was added earlier does not exist.",recipe1Exists);
+		assertTrue("Newly added recipe does not exist.",recipe2Exists);
 		//Make sure deleted recipe is gone.
 		cm.deleteRecipe(0);
 		recipe1Exists = false;
@@ -210,9 +213,7 @@ public class CoffeeMakerTest extends TestCase {
 				}
 			}
 		}
-		assertFalse(recipe1Exists);
-		assertTrue(recipe2Exists);
-		
+		assertFalse("Newly deleted recipe exists.",recipe1Exists);
+		assertTrue("Recipe that was here earlier does not exist.",recipe2Exists);
 	}
-
 }
