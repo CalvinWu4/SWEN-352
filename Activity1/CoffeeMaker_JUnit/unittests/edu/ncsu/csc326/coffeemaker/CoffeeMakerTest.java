@@ -115,33 +115,104 @@ public class CoffeeMakerTest extends TestCase {
 	}
 	
 	public void testAddInventory() {
+		boolean exceptionFlag = true;
 		try {
 			cm.addInventory("4","7","0","9");
 		} catch (InventoryException e) {
-			fail("InventoryException should not be thrown");
+			exceptionFlag = false;
 		}
+		assertTrue(exceptionFlag);
 	}
 	
 	public void testAddInventoryException() {
+		boolean exceptionFlag = false;
 		try {
 			cm.addInventory("4", "-1", "asdf", "3");
-			fail("InventoryException should be thrown");
 		} catch (InventoryException e) {
-			//success if thrown
+			exceptionFlag = true;
 		}
+		assertTrue(exceptionFlag);
 	}
 	
 	public void testCheckInventory() {
-		fail("Not yet implemented");
+		assertEquals("","Coffee: 15\nMilk: 15\nSugar: 15\nChocolate: 15\n",cm.checkInventory());
+		try {
+			cm.addInventory("2", "2", "2", "2"); //TODO Believes sugar is not positive. Definitely is.
+		} catch (InventoryException e) {
+			e.printStackTrace();
+			assertTrue("Excpetion was thrown and should not have been.",false);
+		}
+		assertEquals("","Coffee: 17\nMilk: 17\nSugar: 17\nChocolate: 17\n",cm.checkInventory());
 	}
 	
 	public void testMakeCoffee() {
 		cm.addRecipe(r1);
+		//Successful Transaction
 		assertEquals(25, cm.makeCoffee(0, 75));
+		//User doesn't pay with enough money for a recipe.
+		assertEquals(1,cm.makeCoffee(0, 1));
+		//User tries to pay for a recipe that was deleted.
+		cm.deleteRecipe(0);
+		assertEquals(75,cm.makeCoffee(0, 75));
+		//User tries to pay for a recipe that never existed.
+		assertEquals(75,cm.makeCoffee(1, 75));
+		cm.addRecipe(r2);
+		//User attempts to pay, but not enough chocolate to make Mocha.
+		assertEquals(75, cm.makeCoffee(1, 75));
 	}
 	
 	public void testGetRecipes() {
-		fail("Not yet implemented");
+		//Make sure there are no initial recipes.
+		boolean recipeExists = false;
+		for (Recipe rec : cm.getRecipes()) {
+			if(null != rec) {
+				recipeExists = true;
+			}
+		}
+		assertFalse(recipeExists);
+		//Add a recipe and confirm it's gotten.
+		cm.addRecipe(r1);
+		boolean recipe1Exists = false;
+		for (Recipe rec : cm.getRecipes()) {
+			if(null != rec) {
+				if (rec == r1){
+					recipe1Exists = true;
+				}
+			}
+		}
+		assertTrue(recipe1Exists);
+		recipe1Exists = false;
+		boolean recipe2Exists = false;
+		cm.addRecipe(r2);
+		for (Recipe rec : cm.getRecipes()) {
+			if(null != rec) {
+				if (rec == r1){
+					recipe1Exists = true;
+				}
+				else if (rec == r2){
+					recipe2Exists = true;
+				}
+			}
+		}
+		assertTrue(recipe1Exists);
+		assertTrue(recipe2Exists);
+		//Make sure deleted recipe is gone.
+		cm.deleteRecipe(0);
+		recipe1Exists = false;
+		recipe2Exists = false;
+		for (Recipe rec : cm.getRecipes()) {
+			if(null != rec) {
+				if (rec == r1){
+					recipe1Exists = true;
+				}
+				else if (rec == r2){
+					recipe2Exists = true;
+				}
+			}
+		}
+		assertFalse(recipe1Exists);
+		assertTrue(recipe2Exists);
+		
 	}
 
 }
