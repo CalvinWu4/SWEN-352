@@ -79,27 +79,114 @@ public class InventoryTest extends TestCase {
 	}
 
 	public void testAddCoffee() {
-		fail("Not yet implemented");
+		String amt = "I"; 
+		boolean Nai = false; //Not an Int
+		boolean Neg = false; //Negative value
+		boolean Pos = false; //Positive value
+		boolean Zer = false; //Zero value
+		try {
+			inventory.addCoffee(String.valueOf(amt));
+		}
+		catch(InventoryException e){
+			Nai = true;
+		}
+		inventory.setCoffee(0);
+		int iamtn = 0 - default_amount;
+		int iamtz = 0;
+		int iamtp = 1;
+		try {
+			inventory.addCoffee(String.valueOf(iamtn));
+		}
+		catch(InventoryException e) {
+			Neg = true;
+		}
+		try {
+			inventory.addCoffee(String.valueOf(iamtz));
+		}
+		catch(InventoryException e) {
+			Zer = true;
+		}
+		try {
+			inventory.addCoffee(String.valueOf(iamtp));
+		}
+		catch(InventoryException e) {
+			Pos = true;
+		}
+		assertTrue("Exception thrown for coffee amount being negative", Neg = true);
+		assertTrue("Exception thrown for coffee amount being negative", Pos = true);
+		assertTrue("Exception thrown for coffee amount being negative", Zer = true);
+		//assertTrue("Coffee amount must not be negative", iamtn < 0);
+		//assertTrue("Added amount can be zero", iamtz == 0);
+		//assertTrue("Added amount can be positive", iamtp > 0);
+		assertTrue("Exception thrown for coffee amount being negative", Nai = true);
 	}
 
 	public void testGetMilk() {
-		fail("Not yet implemented");
+		int amt = 5;
+		inventory.setMilk(amt);
+		assertEquals("Milk values need to be the same as set value", amt, inventory.getMilk());
 	}
 
 	public void testSetMilk() {
-		fail("Not yet implemented");
+		int amtn = -1;
+		int amtp = 5;
+		int amtz = 0;
+		inventory.setMilk(amtp);
+		assertEquals("Milk amount must be the same as set value", amtp, inventory.getMilk());
+		assertTrue("Milk amount must be greater than or equal to 0", inventory.getMilk() >= 0);
+		inventory.setMilk(amtn);
+		assertFalse("Milk amount must not be negative", amtn == inventory.getMilk());
+		inventory.setMilk(amtz);
+		assertEquals("Milk amount must be the same as set value", amtz, inventory.getMilk());
+		assertFalse("Milk amount must not be negative", amtn == inventory.getMilk());
 	}
 
 	public void testAddMilk() {
-		fail("Not yet implemented");
+		int amtp = 5;
+		int amtz = 0;
+		int amtn = -1;
+		boolean Pos = true;
+		inventory.setMilk(default_amount);
+		try {
+			inventory.addMilk(String.valueOf(amtp));
+		}catch(InventoryException e){
+			Pos = false;
+		}
+		assertTrue("The amount of Milk you add needs to be positive", Pos);
+		assertEquals("You need to add the correct amount", amtp + default_amount, inventory.getMilk());
+		inventory.setMilk(default_amount);
+		try {
+			inventory.addMilk(String.valueOf(amtn));
+		}catch(InventoryException e) {
+			Pos = false;
+		}
+		assertTrue("The amount of Milk you add needs to be positive", Pos);
+		assertEquals("You need to add the correct amount", default_amount, inventory.getMilk());
+		try {
+			inventory.addMilk(String.valueOf(amtz));
+		}catch(InventoryException e) {
+			Pos = false;
+		}
+		assertEquals("You need to add the correct amount", default_amount, inventory.getMilk());
 	}
 
 	public void testGetSugar() {
-		fail("Not yet implemented");
+		assertEquals("Incorrect amount of coffee.", default_amount, inventory.getSugar());
 	}
 
 	public void testSetSugar() {
-		fail("Not yet implemented");
+		int amtn = -1;
+		int amtp = 5;
+		int amtz = 0;
+		inventory.setSugar(amtp);
+		assertEquals("Sugar amount must be the same as set value", amtp, inventory.getSugar());
+		assertTrue("Sugar amount must be greater than or equal to 0", inventory.getSugar() >= 0);
+		inventory.setSugar(amtn);
+		assertFalse("Sugar amount must not be negative", amtn == inventory.getSugar());
+		inventory.setSugar(amtz);
+		assertEquals("Sugar amount must be the same as set value", amtz, inventory.getSugar());
+		assertFalse("Sugar amount must not be negative", amtn == inventory.getSugar());
+
 	}
 
 	public void testAddSugar() {

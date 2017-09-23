@@ -103,9 +103,11 @@ public class Inventory {
     	int amtCoffee = 0;
     	try {
     		amtCoffee = Integer.parseInt(coffee);
+    		Inventory.coffee += amtCoffee;
     	} catch (NumberFormatException e) {
     		throw new InventoryException("Units of coffee must be a positive integer");
     	}
+    	
 		if (amtCoffee >= 0) {
 			Inventory.coffee += amtCoffee;
 		} else {
@@ -120,13 +122,14 @@ public class Inventory {
      */
     //Javis
     public int getMilk() {
-        return milk;
+        return Inventory.milk;
     }
     
     /**
      * Sets the number of milk units in the inventory
      * to the specified amount.
      * @param milk
+     * @throws InventoryException
      */
   //Javis
     public synchronized void setMilk(int milk) {
@@ -146,14 +149,12 @@ public class Inventory {
     	int amtMilk = 0;
     	try {
     		amtMilk = Integer.parseInt(milk);
+    		if (amtMilk > 0) {
+    			Inventory.milk += amtMilk;
+    		}
     	} catch (NumberFormatException e) {
     		throw new InventoryException("Units of milk must be a positive integer");
-    	}
-		if (amtMilk >= 0) {
-			Inventory.milk += amtMilk;
-		} else {
-			throw new InventoryException("Units of milk must be a positive integer");
-		}
+    	} 
     }
     
     /**
