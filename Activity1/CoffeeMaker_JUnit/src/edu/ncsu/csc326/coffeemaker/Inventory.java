@@ -193,7 +193,7 @@ public class Inventory {
     	} catch (NumberFormatException e) {
     		throw new InventoryException("Units of sugar must be a positive integer");
     	}
-		if (amtSugar <= 0) {
+		if (amtSugar >= 0) {
 			Inventory.sugar += amtSugar;
 		} else {
 			throw new InventoryException("Units of sugar must be a positive integer");
@@ -210,13 +210,13 @@ public class Inventory {
     protected synchronized boolean enoughIngredients(Recipe r) {
         boolean isEnough = true;
         if(Inventory.coffee < r.getAmtCoffee()) {
-            isEnough = false;
+             return isEnough = false;
         }
         if(Inventory.milk < r.getAmtMilk()) {
-            isEnough = false;
+            return isEnough = false;
         }
         if(Inventory.sugar < r.getAmtSugar()) {
-            isEnough = false;
+            return isEnough = false;
         }
         if(Inventory.chocolate < r.getAmtChocolate()) {
             isEnough = false;

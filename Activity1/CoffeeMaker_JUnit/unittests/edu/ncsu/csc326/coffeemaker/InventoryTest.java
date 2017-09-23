@@ -1,6 +1,7 @@
 package edu.ncsu.csc326.coffeemaker;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import junit.framework.TestCase;
 
 public class InventoryTest extends TestCase {
@@ -190,19 +191,108 @@ public class InventoryTest extends TestCase {
 	}
 
 	public void testAddSugar() {
-		fail("Not yet implemented");
+		int amtp = 5;
+		int amtz = 0;
+		int amtn = -1;
+		boolean Pos = true;
+		inventory.setSugar(default_amount);
+		try {
+			inventory.addSugar(String.valueOf(amtp));
+		}catch(InventoryException e){
+			Pos = false;
+		}
+		assertTrue("The amount of Sugar you add needs to be positive", Pos);
+		assertEquals("You need to add the correct amount", amtp + default_amount, inventory.getSugar());
+		inventory.setSugar(default_amount);
+		try {
+			inventory.addSugar(String.valueOf(amtn));
+		}catch(InventoryException e) {
+			Pos = false;
+		}
+		assertFalse("The amount of Sugar you add needs to be positive", Pos);
+		assertEquals("You need to add the correct amount", default_amount, inventory.getSugar());
+		try {
+			inventory.addSugar(String.valueOf(amtz));
+		}catch(InventoryException e) {
+			Pos = false;
+		}
+		assertEquals("You need to add the correct amount", default_amount, inventory.getSugar());
 	}
 
 	public void testEnoughIngredients() {
-		fail("Not yet implemented");
+		Recipe R = new Recipe();
+		boolean NewR = true;
+		boolean isEnough = true;
+		inventory.setChocolate(default_amount);
+		inventory.setCoffee(default_amount);
+		inventory.setMilk(default_amount);
+		inventory.setSugar(default_amount);
+			try {
+				R.setName("recipe");
+				R.setPrice("2040");
+				R.setAmtCoffee(String.valueOf(default_amount));
+				R.setAmtMilk(String.valueOf(default_amount));
+				R.setAmtSugar(String.valueOf(default_amount));
+				R.setAmtChocolate(String.valueOf(default_amount));
+			} catch (RecipeException e) {
+				NewR = false;
+			}
+			assertTrue(inventory.getCoffee() >= R.getAmtCoffee());
+			assertTrue(inventory.getMilk() >= R.getAmtMilk());
+			assertTrue(inventory.getSugar() >= R.getAmtSugar());
+			assertTrue(inventory.getChocolate() >= R.getAmtChocolate());
+			assertTrue("You don;t have enough ingredients", inventory.enoughIngredients(R) == true);
+			try {
+				R.setAmtCoffee(String.valueOf(default_amount+1));
+				R.setAmtMilk(String.valueOf(default_amount+1));
+				R.setAmtSugar(String.valueOf(default_amount+1));
+				R.setAmtChocolate(String.valueOf(default_amount+1));
+			} catch (RecipeException e) {
+				NewR = false;
+			}
+			assertFalse(inventory.getCoffee() >= R.getAmtCoffee());
+			assertFalse(inventory.getMilk() >= R.getAmtMilk());
+			assertFalse(inventory.getSugar() >= R.getAmtSugar());
+			assertFalse(inventory.getChocolate() >= R.getAmtChocolate());	
+
 	}
 
 	public void testUseIngredients() {
-		fail("Not yet implemented");
+		Recipe R = new Recipe();
+		boolean NewR = true;
+		boolean isEnough = true;
+		inventory.setChocolate(default_amount);
+		inventory.setCoffee(default_amount);
+		inventory.setMilk(default_amount);
+		inventory.setSugar(default_amount);
+			try {
+				R.setName("recipe");
+				R.setPrice("2040");
+				R.setAmtCoffee(String.valueOf(default_amount));
+				R.setAmtMilk(String.valueOf(default_amount));
+				R.setAmtSugar(String.valueOf(default_amount));
+				R.setAmtChocolate(String.valueOf(default_amount));
+			} catch (RecipeException e) {
+				NewR = false;
+			}
+		assertTrue(inventory.useIngredients(R));	
+		try {
+			R.setAmtCoffee(String.valueOf(default_amount-1));
+			R.setAmtMilk(String.valueOf(default_amount-1));
+			R.setAmtSugar(String.valueOf(default_amount-1));
+			R.setAmtChocolate(String.valueOf(default_amount-1));
+		} catch (RecipeException e) {
+			NewR = false;
+		}
+		assertFalse(inventory.useIngredients(R));
 	}
 
 	public void testToString() {
-		fail("Not yet implemented");
+		assertEquals(inventory.toString(), ("Coffee: " +
+		inventory.getCoffee() + "\n" + "Milk: " +
+		inventory.getMilk() + "\n" + "Sugar: " +
+		inventory.getSugar() + "\n" + "Chocolate: " +
+    	inventory.getChocolate() + "\n")); 
 	}
 
 }
