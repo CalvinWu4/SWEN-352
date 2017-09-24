@@ -1,5 +1,7 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import java.lang.reflect.Field;
+
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import junit.framework.TestCase;
@@ -26,7 +28,19 @@ public class InventoryTest extends TestCase {
 	public void testGetChocolate() {
 		assertEquals("The inventory did not start with the default amount of chocolate.",default_amount,inventory.getChocolate());
 		int new_amount = 10;
-		inventory.setChocolate(new_amount);
+		Field field;
+		try {
+			field = inventory.getClass().getDeclaredField("chocolate");
+			field.setAccessible(true);
+			field.set(inventory, new_amount);
+		} catch (NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		}
+		catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
 		assertEquals("The new amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
 	}
 
@@ -34,12 +48,41 @@ public class InventoryTest extends TestCase {
 		//Test with positive number
 		int new_amount = 10;
 		inventory.setChocolate(new_amount);
-		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,inventory.getChocolate());
+		
+		Field field;
+		int testAmount = 0;
+		try {
+			field = inventory.getClass().getDeclaredField("chocolate");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
+		
+		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,testAmount);
 		//Reset the amount of chocolate
 		inventory.setChocolate(default_amount); 
 		//Test with negative number.
 		int negative_amount = -1;
 		inventory.setChocolate(negative_amount);
+		
+		try {
+			field = inventory.getClass().getDeclaredField("coffee");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
+		
+		
 		assertEquals("Amount of chocolate was set while trying to add a negative amount.",default_amount, inventory.getChocolate());
 		
 	}
@@ -68,15 +111,60 @@ public class InventoryTest extends TestCase {
 	}
 
 	public void testGetCoffee() {
-		assertEquals("Incorrect amount of coffee.", default_amount, inventory.getCoffee());
+		assertEquals("Incorrect default amount of coffee.", default_amount, inventory.getCoffee());
+		int new_amount = 10;
+		Field field;
+		try {
+			field = inventory.getClass().getDeclaredField("coffee");
+			field.setAccessible(true);
+			field.set(inventory, new_amount);
+		} catch (NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		}
+		catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
+		assertEquals("Incorrect default amount of coffee.", new_amount, inventory.getCoffee());
 	}
 
 	public void testSetCoffee() {
 		int new_amount = 10;
 		inventory.setCoffee(new_amount);
-		assertEquals("Amount of coffee not set correctly.", new_amount, inventory.getCoffee());
+		
+		Field field;
+		int testAmount = 0;
+		try {
+			field = inventory.getClass().getDeclaredField("coffee");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
+		
+		assertEquals("Amount of coffee not set correctly.", new_amount, testAmount);
 		inventory.setCoffee(-1);
-		assertEquals("Negative amount of coffee set.", new_amount, inventory.getCoffee());
+		
+		try {
+			field = inventory.getClass().getDeclaredField("coffee");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+		}
+		
+		assertEquals("Negative amount of coffee set.", new_amount, testAmount);
 	}
 
 	public void testAddCoffee() {
