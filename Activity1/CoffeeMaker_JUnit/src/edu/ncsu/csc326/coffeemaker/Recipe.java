@@ -105,23 +105,43 @@ public class Recipe {
     public int getAmtSugar() {
 		return amtSugar;
 	}
-    /**
+	/**
 	 * @param amtSugar   The amtSugar to set.
 	 */
-    //Calvin
-    public void setAmtSugar(String sugar) throws RecipeException {
-    	int amtSugar = 0;
-    	try {
-    		amtSugar = Integer.parseInt(sugar);
-    	} catch (NumberFormatException e) {
-    		throw new RecipeException("Units of sugar must be a positive integer");
-    	}
+	//Calvin
+	public void setAmtSugar(String sugar) throws RecipeException {
+		int amtSugar = 0;
+		try {
+			amtSugar = Integer.parseInt(sugar);
+		} catch (NumberFormatException e) {
+			throw new RecipeException("Units of sugar must be a positive integer");
+		}
 		if (amtSugar >= 0) {
 			this.amtSugar = amtSugar;
 		} else {
 			throw new RecipeException("Units of sugar must be a positive integer");
 		}
 	}
+
+// Corrected
+//    /**
+//	 * @param amtSugar   The amtSugar to set.
+//	 */
+//    //Calvin
+//    public void setAmtSugar(String amtSugar) throws RecipeException {
+//    	int sugarInt;
+//    	try {
+//    		sugarInt = Integer.parseInt(amtSugar);
+//    	} catch (NumberFormatException e) {
+//    		throw new RecipeException("Units of sugar must be a positive integer");
+//    	}
+//		if (sugarInt > 0) {
+//			this.amtSugar = sugarInt;
+//		} else {
+//			throw new RecipeException("Units of sugar must be a positive integer");
+//		}
+//	}
+
     /**
 	 * @return   Returns the name.
 	 */
