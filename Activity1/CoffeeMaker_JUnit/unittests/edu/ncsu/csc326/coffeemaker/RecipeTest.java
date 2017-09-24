@@ -91,16 +91,17 @@ public class RecipeTest extends TestCase {
 
 	//Calvin
 	public void testGetName() {
-		String getName = "";
-		String setName = "Recipe 1";
-		try {
-			getName = Recipe.class.getDeclaredField("name").toString();
+		String name = "999";
 
-		} catch (NoSuchFieldException e) {
+		try {
+			Field afield = Recipe.class.getDeclaredField("name");
+			afield.setAccessible(true);
+			name = (String) afield.get(recipe);
+
+		} catch (NoSuchFieldException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		getName = setName;
-		assertEquals("Getter must return the correct recipe name.", getName, setName);
+		assertEquals("Getter must return the correct recipe name.", recipe.getName(), name);
 	}
 
 	//Calvin
