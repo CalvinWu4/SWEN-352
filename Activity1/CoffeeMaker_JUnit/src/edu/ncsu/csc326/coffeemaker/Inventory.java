@@ -103,7 +103,7 @@ public class Inventory {
     	int amtCoffee = 0;
     	try {
     		amtCoffee = Integer.parseInt(coffee);
-    		Inventory.coffee += amtCoffee;
+    		Inventory.coffee += amtCoffee; //TODO this needs to be deleted to work.
     	} catch (NumberFormatException e) {
     		throw new InventoryException("Units of coffee must be a positive integer");
     	}
