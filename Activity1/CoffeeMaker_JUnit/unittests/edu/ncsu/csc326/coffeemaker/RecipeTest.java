@@ -18,7 +18,7 @@ public class RecipeTest extends TestCase {
 		super.setUp();
 	}
 
-	// Helper function for getting private field values from Recipe
+	// Helper function for getting int values from private fields in Recipe
 	public int getInt(String field){
 		int result = 999;
 		try {
@@ -32,7 +32,25 @@ public class RecipeTest extends TestCase {
 		return result;
 	}
 
+	// Helper function for getting String values from private fields in Recipe
+	public String getString(String field) {
+		String result = "test";
+		try {
+			Field afield = Recipe.class.getDeclaredField(field);
+			afield.setAccessible(true);
+			result = (String) afield.get(recipe);
+
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public void testHashCode() {
+		fail("Not yet implemented");
+	}
+
+	public void testEqualsObject() {
 		fail("Not yet implemented");
 	}
 
@@ -65,7 +83,6 @@ public class RecipeTest extends TestCase {
 	}
 
 	//Calvin
-
 	public void testGetAmtSugar() {
 		assertEquals("Getter must return the correct sugar amount.", recipe.getAmtSugar(),
 				getInt("amtSugar"));
@@ -86,53 +103,46 @@ public class RecipeTest extends TestCase {
 		}
 		catch(RecipeException e){
 		}
-		assertTrue("Sugar amount must be positive", getInt("amtSugar") > 0);
 	}
 
 	//Calvin
 	public void testGetName() {
-		String name = "999";
-
-		try {
-			Field afield = Recipe.class.getDeclaredField("name");
-			afield.setAccessible(true);
-			name = (String) afield.get(recipe);
-
-		} catch (NoSuchFieldException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		assertEquals("Getter must return the correct recipe name.", recipe.getName(), name);
+		assertEquals("Must return the correct recipe name.", recipe.getName(), getString("name"));
 	}
 
 	//Calvin
 	public void testSetName() {
-		String getName = "";
-		String setName = "Recipe 1";
-//		recipe.setName(null);
-//		assertEquals("Name value must match the set value.", name, recipe);
-//		String before = name;
-//		assertEquals("Name value must ignore the null value.", name, recipe.name);
-
+		recipe.setName("test");
+		assertEquals("Name must be the same as set value", "test", getString("name"));
 	}
 
 	//Calvin
 	public void testGetPrice() {
-		fail("Not yet implemented");
+		assertEquals("Getter must return the correct price.", recipe.getPrice(),
+				getInt("price"));
 	}
 
 	//Calvin
-	public void testSetPrice() {
-		fail("Not yet implemented");
+	public void testSetPrice() throws RecipeException {
+		recipe.setPrice(String.valueOf(positive_amount));
+		assertEquals("Price must be the same as set value", positive_amount, getInt("price"));
+		try{
+			recipe.setPrice(String.valueOf(negative_amount));
+			fail("Price cannot be negative");
+		}
+		catch(RecipeException e){
+		}
+		try{
+			recipe.setPrice(String.valueOf(zero_amount));
+			fail("Price cannot be zero");
+		}
+		catch(RecipeException e){
+		}
 	}
 
 	//Calvin
 	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	//Calvin
-	public void testEqualsObject() {
-		fail("Not yet implemented");
+		assertEquals("Must return the correct recipe name.", recipe.toString(), getString("name"));
 	}
 
 }
