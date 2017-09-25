@@ -14,7 +14,7 @@ public class RecipeBook {
 	public RecipeBook() {
 		recipeArray = new Recipe[NUM_RECIPES];
 	}
-	
+
 	/**
 	 * Returns the recipe array.
 	 * @param r
