@@ -9,6 +9,7 @@ public class RecipeTest extends TestCase {
 
 
 	private Recipe recipe;
+	private Recipe recipe2;
 
 	private static final int default_amount = 0;
 	private static final String default_name = "";
@@ -21,6 +22,7 @@ public class RecipeTest extends TestCase {
 
 	public void setUp() throws Exception {
 		recipe = new Recipe();
+		recipe2 = new Recipe();
 		super.setUp();
 	}
 	// Helper function for getting int values from private fields in Recipe
@@ -55,8 +57,33 @@ public class RecipeTest extends TestCase {
 		fail("Not yet implemented");
 	}
 
-	public void testEqualsObject() {
-		fail("Not yet implemented");
+	public void testEqualObjects() throws RecipeException {
+		recipe.setName("Mocha");
+		recipe.setAmtChocolate("1");
+		recipe.setAmtCoffee("3");
+		recipe.setAmtMilk("3");
+		recipe.setAmtSugar("1");
+
+		recipe2.setName("Mocha");
+		recipe2.setAmtChocolate("1");
+		recipe2.setAmtCoffee("3");
+		recipe2.setAmtMilk("3");
+		recipe2.setAmtSugar("1");
+
+		assertTrue("The two objects didn't match",recipe.equals(recipe2));
+	}
+
+	public void testUnequalObjects() throws RecipeException {
+		recipe.setName("Americano");
+		recipe.setAmtCoffee("3");
+
+		recipe2.setName("Mocha");
+		recipe2.setAmtChocolate("1");
+		recipe2.setAmtCoffee("3");
+		recipe2.setAmtMilk("3");
+		recipe2.setAmtSugar("1");
+
+		assertFalse("The two unequal objects match",recipe.equals(recipe2));
 	}
 
 	public void testRecipeConstructor() throws RecipeException {
