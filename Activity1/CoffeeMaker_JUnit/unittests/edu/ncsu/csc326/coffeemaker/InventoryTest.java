@@ -73,6 +73,30 @@ public class InventoryTest extends TestCase {
 		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,testAmount);
 	}
 	
+	public void testSetZeroChocolate() {
+		//Test with positive number
+		int new_amount = 0;
+		inventory.setChocolate(new_amount);
+		
+		Field field;
+		int testAmount = 0;
+		try {
+			field = inventory.getClass().getDeclaredField("chocolate");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+		
+		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,testAmount);
+	}
+	
 	public void testSetNegativeChocolate(){
 		//Test with negative number.
 		Field field;
@@ -143,6 +167,27 @@ public class InventoryTest extends TestCase {
 
 	public void testSetPositiveCoffee() {
 		int new_amount = 10;
+		inventory.setCoffee(new_amount);
+		
+		Field field;
+		int testAmount = 0;
+		try {
+			field = inventory.getClass().getDeclaredField("coffee");
+			field.setAccessible(true);
+			testAmount = field.getInt(inventory);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+		
+		assertEquals("Amount of coffee not set correctly.", new_amount, testAmount);
+	}
+	
+	public void testSetZeroCoffee() {
+		int new_amount = 0;
 		inventory.setCoffee(new_amount);
 		
 		Field field;
@@ -282,6 +327,17 @@ public class InventoryTest extends TestCase {
 		assertEquals("Milk amount not correct", default_amount+add, inventory.getMilk());
 	}
 	
+	public void testAddMilkZero() {
+		int add =  0; //How much Coffee is being added
+		inventory.setMilk(default_amount);
+		try {
+			inventory.addMilk(String.valueOf(add));
+		} catch(InventoryException e) {
+			//TODO Auto created Catch
+		}
+		assertEquals("Milk amount not correct", default_amount+add, inventory.getMilk());
+	}
+	
 	public void testAddMilkLetter() {
 		boolean LetterFlag = false; //Checks if letter tries to be added
 		inventory.setMilk(default_amount);
@@ -355,6 +411,17 @@ public class InventoryTest extends TestCase {
 
 	public void testAddSugarPositive() {
 		int add =  5; //How much Coffee is being added
+		inventory.setSugar(default_amount);
+		try {
+			inventory.addSugar(String.valueOf(add));
+		} catch(InventoryException e) {
+			//TODO Auto created Catch
+		}
+		assertEquals("Sugar amount not correct", default_amount+add, inventory.getSugar());
+	}
+	
+	public void testAddSugarZero() {
+		int add =  0; //How much Coffee is being added
 		inventory.setSugar(default_amount);
 		try {
 			inventory.addSugar(String.valueOf(add));
