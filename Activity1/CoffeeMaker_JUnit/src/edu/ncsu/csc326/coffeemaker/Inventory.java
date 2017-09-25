@@ -103,7 +103,6 @@ public class Inventory {
     	int amtCoffee = 0;
     	try {
     		amtCoffee = Integer.parseInt(coffee);
-    		Inventory.coffee += amtCoffee; //TODO this needs to be deleted to work.
     	} catch (NumberFormatException e) {
     		throw new InventoryException("Units of coffee must be a positive integer");
     	}
@@ -149,13 +148,19 @@ public class Inventory {
     	int amtMilk = 0;
     	try {
     		amtMilk = Integer.parseInt(milk);
-    		if (amtMilk > 0) {
+    	}catch (NumberFormatException e){
+    		throw new InventoryException("Units of milk must be a positive integer");
+    	}
+    	
+    	if (amtMilk >= 0) {
     			Inventory.milk += amtMilk;
     		}
-    	} catch (NumberFormatException e) {
+    	
+    	else {
     		throw new InventoryException("Units of milk must be a positive integer");
-    	} 
-    }
+    	}
+    }	
+    
     
     /**
      * Returns the current number of sugar units in 

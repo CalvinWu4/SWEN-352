@@ -86,7 +86,7 @@ public class Main {
 			r.setAmtChocolate(chocolateString);
 			
 			boolean recipeAdded = coffeeMaker.addRecipe(r);
-		    
+			
 		    if(recipeAdded) {
 		    	System.out.println(name + " successfully added.\n");
 		    } else {
