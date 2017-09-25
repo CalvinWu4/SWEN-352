@@ -54,32 +54,153 @@ public class RecipeTest extends TestCase {
 		fail("Not yet implemented");
 	}
 
-	public void testRecipe() {
-		fail("Not yet implemented");
+	public void testRecipeConstructor() throws RecipeException {
+		//Testing the creation of a new recipe object
+		int default_amount = 0;
+		recipe = new Recipe();
+
+		Field field;
+		int testAmount = 0;
+		try {
+			field = recipe.getClass().getDeclaredField("amtChocolate");
+			field.setAccessible(true);
+			testAmount = 0 + field.getInt(recipe);
+			field = recipe.getClass().getDeclaredField("amtCoffee");
+			field.setAccessible(true);
+			testAmount = 0 + field.getInt(recipe);
+			field = recipe.getClass().getDeclaredField("amtMilk");
+			field.setAccessible(true);
+			testAmount = 0 + field.getInt(recipe);
+			field = recipe.getClass().getDeclaredField("amtSugar");
+			field.setAccessible(true);
+			testAmount = 0 + field.getInt(recipe);
+			field = recipe.getClass().getDeclaredField("price");
+			field.setAccessible(true);
+			testAmount = 0 + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+
+		assertEquals("The amount of chocolate in the inventory is incorrect.",default_amount,testAmount);
 	}
 
 	public void testGetAmtChocolate() {
-		fail("Not yet implemented");
+		assertEquals("Getter must return the correct Chocolate amount.", recipe.getAmtChocolate(),
+				getInt("amtChocolate"));
 	}
 
-	public void testSetAmtChocolate() {
-		fail("Not yet implemented");
+	public void testSetAmtChocolate() throws RecipeException {
+		//Test with positive number
+		String new_amount = "1";
+		recipe.setAmtChocolate(new_amount);
+
+		Field field;
+		String testAmount = "0";
+		try {
+			field = recipe.getClass().getDeclaredField("amtChocolate");
+			field.setAccessible(true);
+			testAmount = "" + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+
+		assertEquals("The amount of chocolate in the recipe is incorrect.",new_amount,testAmount);
 	}
+
+	// Throws an exception for negative numbers.
+//
+//	public void testSetNegAmtChocolate() throws RecipeException {
+//		//Test with positive number
+//		String new_amount = "-10";
+//		recipe.setAmtChocolate(new_amount);
+//
+//		Field field;
+//		String testAmount = "0";
+//		try {
+//			field = recipe.getClass().getDeclaredField("amtChocolate");
+//			field.setAccessible(true);
+//			testAmount = "" + field.getInt(recipe);
+//		} catch (NoSuchFieldException | SecurityException e2) {
+//			e2.printStackTrace();
+//			//Stop test if exception is thrown, as there is an error with the test.
+//			assertTrue("Caught an No Such Field or Security exception.",false);
+//		} catch (IllegalArgumentException | IllegalAccessException e1) {
+//			e1.printStackTrace();
+//			//Stop test if exception is thrown, as there is an error with the test.
+//			assertTrue("Caught an illegal argument or illegal access exception.",false);
+//		}
+//
+//		assertNotSame("The amount of chocolate should not be negative.",new_amount,testAmount);
+//	}
 
 	public void testGetAmtCoffee() {
-		fail("Not yet implemented");
+		assertEquals("Getter must return the correct coffee amount.", recipe.getAmtCoffee(),
+				getInt("amtCoffee"));
 	}
 
-	public void testSetAmtCoffee() {
-		fail("Not yet implemented");
+	public void testSetPosAmtCoffee() throws RecipeException {
+		//Test with positive number
+		String new_amount = "1";
+		recipe.setAmtCoffee(new_amount);
+
+		Field field;
+		String testAmount = "0";
+		try {
+			field = recipe.getClass().getDeclaredField("amtCoffee");
+			field.setAccessible(true);
+			testAmount = "" + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+
+		assertEquals("The amount of coffee in the recipe is incorrect.",new_amount,testAmount);
 	}
 
-	public void testGetAmtMilk() {
-		fail("Not yet implemented");
+	public void testGetAmtMilkNonInt() {
+		assertEquals("Getter must return the correct milk amount.", recipe.getAmtMilk(),
+				getInt("amtMilk"));
 	}
 
-	public void testSetAmtMilk() {
-		fail("Not yet implemented");
+	public void testSetPosAmtMilk() throws RecipeException {
+		//Test with positive number
+		String new_amount = "1";
+		recipe.setAmtMilk(new_amount);
+
+		Field field;
+		String testAmount = "0";
+		try {
+			field = recipe.getClass().getDeclaredField("amtMilk");
+			field.setAccessible(true);
+			testAmount = "" + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
+		}
+
+		assertEquals("The amount of milk in the recipe is incorrect.",new_amount,testAmount);
 	}
 
 	//Calvin
@@ -89,20 +210,27 @@ public class RecipeTest extends TestCase {
 	}
 
 	public void testSetAmtSugar() throws RecipeException {
-		recipe.setAmtSugar(String.valueOf(positive_amount));
-		assertEquals("Sugar amount must be the same as set value", positive_amount, getInt("amtSugar"));
-		try{
-			recipe.setAmtSugar(String.valueOf(negative_amount));
-			fail("Sugar amount cannot be negative");
+		//Test with positive number
+		String new_amount = "1";
+		recipe.setAmtSugar(new_amount);
+
+		Field field;
+		String testAmount = "0";
+		try {
+			field = recipe.getClass().getDeclaredField("amtSugar");
+			field.setAccessible(true);
+			testAmount = "" + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
-		catch(RecipeException e){
-		}
-		try{
-			recipe.setAmtSugar(String.valueOf(zero_amount));
-			fail("Sugar amount cannot be zero");
-		}
-		catch(RecipeException e){
-		}
+
+		assertEquals("The amount of sugar in the recipe is incorrect.",new_amount,testAmount);
 	}
 
 	//Calvin
@@ -127,20 +255,27 @@ public class RecipeTest extends TestCase {
 
 	//Calvin
 	public void testSetPrice() throws RecipeException {
-		recipe.setPrice(String.valueOf(positive_amount));
-		assertEquals("Price must be the same as set value", positive_amount, getInt("price"));
-		try{
-			recipe.setPrice(String.valueOf(negative_amount));
-			fail("Price cannot be negative");
+		//Test with positive number
+		String new_amount = "1";
+		recipe.setPrice(new_amount);
+
+		Field field;
+		String testAmount = "0";
+		try {
+			field = recipe.getClass().getDeclaredField("price");
+			field.setAccessible(true);
+			testAmount = "" + field.getInt(recipe);
+		} catch (NoSuchFieldException | SecurityException e2) {
+			e2.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an No Such Field or Security exception.",false);
+		} catch (IllegalArgumentException | IllegalAccessException e1) {
+			e1.printStackTrace();
+			//Stop test if exception is thrown, as there is an error with the test.
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
-		catch(RecipeException e){
-		}
-		try{
-			recipe.setPrice(String.valueOf(zero_amount));
-			fail("Price cannot be zero");
-		}
-		catch(RecipeException e){
-		}
+
+		assertEquals("The price of the recipe is incorrect.",new_amount,testAmount);
 	}
 
 	//Calvin
