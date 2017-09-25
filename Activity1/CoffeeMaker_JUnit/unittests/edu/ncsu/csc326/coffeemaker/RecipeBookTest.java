@@ -53,13 +53,10 @@ public class RecipeBookTest extends TestCase {
 
 	public void testAddDupRecipe() {
 		recipeBook.addRecipe(recipe);
+		RecipeBook before = recipeBook;
 		recipeBook.addRecipe(recipe);
-		for(int i = 1; i < recipeBook.getRecipes().length; i++) {
-			if(recipeBook.getRecipes()[i] != null){
-				fail("Duplicate recipe was added when it shouldn't have been.");
-			}
+		assertEquals("Duplicate recipe was added when it shouldn't have been.", recipeBook, before);
 		}
-	}
 
 	public void testAddRecipeToFullBook() {
 		recipeBook.addRecipe(recipe);
@@ -68,17 +65,30 @@ public class RecipeBookTest extends TestCase {
 		recipe.setName("test3");
 		recipeBook.addRecipe(recipe);
 		recipe.setName("test4");
-		recipeBook.addRecipe(recipe);
-		for(int i = 1; i < recipeBook.getRecipes().length; i++) {
-			if(recipeBook.getRecipes()[i] != null){
-				fail("Duplicate recipe was added when it shouldn't have been.");
-			}
-		}
+		RecipeBook before = recipeBook;
+		assertEquals("Recipe was added to a full recipebook.", recipeBook, before);
+	}
+
+	//Calvin
+	public void testDeleteNullRecipe() {
+		RecipeBook before = recipeBook;
+		recipeBook.deleteRecipe(0);
+		assertEquals("Null recipe cannot be deleted", recipeBook, before);
 	}
 
 	//Calvin
 	public void testDeleteRecipe() {
-		fail("Not yet implemented");
+		RecipeBook before = recipeBook;
+		recipeBook.addRecipe(recipe);
+		recipeBook.deleteRecipe(0);
+		assertEquals("Recipe was no deleted", recipeBook, before);
+	}
+
+	//Calvin
+	public void testgetDeletedRecipeName() {
+		recipeBook.addRecipe(recipe);
+		assertEquals("Wrong deleted recipe index returned", recipeBook.deleteRecipe(0),
+				"test");
 	}
 
 	//Calvin
