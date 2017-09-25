@@ -43,13 +43,13 @@ public class InventoryTest extends TestCase {
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
 			//Stop test if exception is thrown, as there is an error with the test.
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertEquals("The amount of chocolate in the inventory is incorrect.",new_amount,testAmount);
 	}
 	
-	public void testSetNegitiveChocolate(){
+	public void testSetNegativeChocolate(){
 		//Test with negative number.
 		Field field;
 		int testAmount = 0;
@@ -67,7 +67,7 @@ public class InventoryTest extends TestCase {
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
 			//Stop test if exception is thrown, as there is an error with the test.
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		assertEquals("Amount of chocolate was set while trying to add a negative amount.",default_amount, testAmount);
 	}
@@ -83,7 +83,7 @@ public class InventoryTest extends TestCase {
 		assertEquals("Amount of chocolate not increased.",default_amount + add, inventory.getChocolate());
 	}
 	
-	public void testAddNegatvieChocolate() {
+	public void testAddNegativeChocolate() {
 		inventory.setChocolate(default_amount);
 		boolean NegFlag = false;
 		String neg = "-1";
@@ -128,7 +128,7 @@ public class InventoryTest extends TestCase {
 			assertTrue("Caught an No Such Field or Security exception.",false);
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertEquals("Amount of coffee not set correctly.", new_amount, testAmount);
@@ -151,7 +151,7 @@ public class InventoryTest extends TestCase {
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
 			//Stop test if exception is thrown, as there is an error with the test.
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertEquals("Negative amount of coffee set.", default_amount, testAmount);
@@ -210,7 +210,7 @@ public class InventoryTest extends TestCase {
 			assertTrue("Caught an No Such Field or Security exception.",false);
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertEquals("Amount of coffee not set correctly.", pos_amount, testAmount);
@@ -233,7 +233,7 @@ public class InventoryTest extends TestCase {
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertNotSame("Negative amount of coffee set.", neg_amount, testAmount);
@@ -292,7 +292,7 @@ public class InventoryTest extends TestCase {
 			assertTrue("Caught an No Such Field or Security exception.",false);
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			e1.printStackTrace();
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertEquals("Amount of coffee not set correctly.", pos_amount, testAmount);
@@ -315,7 +315,7 @@ public class InventoryTest extends TestCase {
 		} catch (IllegalArgumentException | IllegalAccessException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			assertTrue("Caught an illegal arguement or illegal access exception.",false);
+			assertTrue("Caught an illegal argument or illegal access exception.",false);
 		}
 		
 		assertNotSame("Negative amount of coffee set.", neg_amount, testAmount);
