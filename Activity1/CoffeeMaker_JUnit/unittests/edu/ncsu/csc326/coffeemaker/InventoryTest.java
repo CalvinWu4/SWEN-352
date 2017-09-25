@@ -10,10 +10,30 @@ public class InventoryTest extends TestCase {
 	
 	private Inventory inventory;
 	private int default_amount;
+	private Recipe R1;
+	private Recipe R2;
 
 	protected void setUp() throws Exception {
 		inventory = new Inventory();
+		
 		default_amount = 15;
+		
+		R1 = new Recipe();
+		R1.setName("recipe");
+		R1.setPrice("2040");
+		R1.setAmtCoffee(String.valueOf(default_amount));
+		R1.setAmtMilk(String.valueOf(default_amount));
+		R1.setAmtSugar(String.valueOf(default_amount));
+		R1.setAmtChocolate(String.valueOf(default_amount));
+		
+		R2 = new Recipe();
+		R2.setName("recipe");
+		R2.setPrice("2040");
+		R2.setAmtCoffee(String.valueOf(default_amount+1));
+		R2.setAmtMilk(String.valueOf(default_amount+1));
+		R2.setAmtSugar(String.valueOf(default_amount+1));
+		R2.setAmtChocolate(String.valueOf(default_amount+1));
+	
 		super.setUp();
 	}
 
@@ -355,76 +375,53 @@ public class InventoryTest extends TestCase {
 		assertTrue("Exception not thrown for adding a negative number instead of a positive number.", NegativeFlag);
 	}
 
-	public void testEnoughIngredients() {
-		Recipe R = new Recipe();
-		boolean NewR = true;
-		boolean isEnough = true;
-		inventory.setChocolate(default_amount);
-		inventory.setCoffee(default_amount);
-		inventory.setMilk(default_amount);
-		inventory.setSugar(default_amount);
-			try {
-				R.setName("recipe");
-				R.setPrice("2040");
-				R.setAmtCoffee(String.valueOf(default_amount));
-				R.setAmtMilk(String.valueOf(default_amount));
-				R.setAmtSugar(String.valueOf(default_amount));
-				R.setAmtChocolate(String.valueOf(default_amount));
-			} catch (RecipeException e) {
-				NewR = false;
-			}
-			assertTrue(inventory.getCoffee() >= R.getAmtCoffee());
-			assertTrue(inventory.getMilk() >= R.getAmtMilk());
-			assertTrue(inventory.getSugar() >= R.getAmtSugar());
-			assertTrue(inventory.getChocolate() >= R.getAmtChocolate());
-			assertTrue("You don;t have enough ingredients", inventory.enoughIngredients(R) == true);
-			try {
-				R.setAmtCoffee(String.valueOf(default_amount+1));
-				R.setAmtMilk(String.valueOf(default_amount+1));
-				R.setAmtSugar(String.valueOf(default_amount+1));
-				R.setAmtChocolate(String.valueOf(default_amount+1));
-			} catch (RecipeException e) {
-				NewR = false;
-			}
-			assertFalse(inventory.getCoffee() >= R.getAmtCoffee());
-			assertFalse(inventory.getMilk() >= R.getAmtMilk());
-			assertFalse(inventory.getSugar() >= R.getAmtSugar());
-			assertFalse(inventory.getChocolate() >= R.getAmtChocolate());	
-
+	public void testEnoughIngredientsTrue() {
+		boolean isEnough;
+			
+			if(inventory.enoughIngredients(R1)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertTrue("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testEnoughIngredientsFalse() {
+		boolean isEnough;
+			
+			if(inventory.enoughIngredients(R2)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertFalse("You don't have enough ingredients", isEnough);
 	}
 
-	public void testUseIngredients() {
-		Recipe R = new Recipe();
+	public void testUseIngredientsTrue() {
 		boolean NewR = true;
-		boolean isEnough = true;
 		inventory.setChocolate(default_amount);
 		inventory.setCoffee(default_amount);
 		inventory.setMilk(default_amount);
 		inventory.setSugar(default_amount);
-			try {
-				R.setName("recipe");
-				R.setPrice("2040");
-				R.setAmtCoffee(String.valueOf(default_amount));
-				R.setAmtMilk(String.valueOf(default_amount));
-				R.setAmtSugar(String.valueOf(default_amount));
-				R.setAmtChocolate(String.valueOf(default_amount));
-			} catch (RecipeException e) {
-				NewR = false;
-			}
-		assertTrue(inventory.useIngredients(R));	
-		try {
-			R.setAmtCoffee(String.valueOf(default_amount-1));
-			R.setAmtMilk(String.valueOf(default_amount-1));
-			R.setAmtSugar(String.valueOf(default_amount-1));
-			R.setAmtChocolate(String.valueOf(default_amount-1));
-		} catch (RecipeException e) {
-			NewR = false;
+		assertTrue(inventory.useIngredients(R1));
+	}
+	
+	public void testUseIngredientsFalse() {
+		inventory.setChocolate(default_amount);
+		inventory.setCoffee(default_amount);
+		inventory.setMilk(default_amount);
+		inventory.setSugar(default_amount);
+		assertFalse(inventory.useIngredients(R2));	
 		}
-		assertFalse(inventory.useIngredients(R));
-	}
 
-	public void testToString() {
+	public void testToStringTrue() {
 		assertEquals(inventory.toString(), ("Coffee: " +
+		inventory.getCoffee() + "\n" + "Milk: " +
+		inventory.getMilk() + "\n" + "Sugar: " +
+		inventory.getSugar() + "\n" + "Chocolate: " +
+    	inventory.getChocolate() + "\n")); 
+	}
+	
+	public void testToStringFalse() {
+		assertNotSame(inventory.toString(), ("Coffee " +
 		inventory.getCoffee() + "\n" + "Milk: " +
 		inventory.getMilk() + "\n" + "Sugar: " +
 		inventory.getSugar() + "\n" + "Chocolate: " +

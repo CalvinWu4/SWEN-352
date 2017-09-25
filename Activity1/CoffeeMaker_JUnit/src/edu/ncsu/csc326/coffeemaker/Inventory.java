@@ -215,13 +215,13 @@ public class Inventory {
     protected synchronized boolean enoughIngredients(Recipe r) {
         boolean isEnough = true;
         if(Inventory.coffee < r.getAmtCoffee()) {
-             return isEnough = false;
+            isEnough = false;
         }
         if(Inventory.milk < r.getAmtMilk()) {
-            return isEnough = false;
+            isEnough = false;
         }
         if(Inventory.sugar < r.getAmtSugar()) {
-            return isEnough = false;
+            isEnough = false;
         }
         if(Inventory.chocolate < r.getAmtChocolate()) {
             isEnough = false;
