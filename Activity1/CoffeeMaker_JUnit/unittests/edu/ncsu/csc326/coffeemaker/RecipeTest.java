@@ -112,6 +112,9 @@ public class RecipeTest extends TestCase {
 
 	//Calvin
 	public void testSetName() {
+		String before = getString("name");
+		recipe.setName(null);
+		assertEquals(before, getString("name"));
 		recipe.setName("test");
 		assertEquals("Name must be the same as set value", "test", getString("name"));
 	}
