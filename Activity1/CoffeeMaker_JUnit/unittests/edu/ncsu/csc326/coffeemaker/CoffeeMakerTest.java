@@ -76,21 +76,9 @@ public class CoffeeMakerTest extends TestCase {
 	public void testDeleteRecipe() {
 		Recipe temp;
 		boolean contains = false;
-
 		cm.addRecipe(r1);
-		Recipe[] array_added = cm.getRecipes();
-		
-		for (Recipe recipe : array_added) {
-			if (recipe == null || recipe.getName() == "") {
-				continue;
-			}
-			else	
-			{
-				contains = true;
-			}
-		}
-		assertTrue("Recipe not added corectly.",contains);
 		contains = false;
+		//R1 will be the recipe in slot 0, because it was the first (and only) one added.
 		String name = cm.deleteRecipe(0);
 		Recipe[] array_deleted = cm.getRecipes();
 		for (Recipe recipe : array_deleted) {
@@ -106,10 +94,38 @@ public class CoffeeMakerTest extends TestCase {
 				"", cm.deleteRecipe(0)); //TODO This recipe was already deleted. Should it be null instead of ""?
 	}
 	
-	public void testEditRecipe() {
+	public void testDeleteRecipeName() {
+		cm.addRecipe(r1);
+		//R1 will be the recipe in slot 0, because it was the first (and only) one added.
+		String name = cm.deleteRecipe(0);
+		assertTrue("Wrong name returned while deleting recipe.",r1.getName().equals(name));
+	}
+	
+	public void testDeleteNullRecipe() {
+		cm.addRecipe(r1);
+		//R1 will be the recipe in slot 0, because it was the first (and only) one added.
+		cm.deleteRecipe(0);
+		
+		assertNull("Null was not returned while deleting a recipe that did not exist.",cm.deleteRecipe(1));
+	}
+	
+	public void testDeleteDeletedRecipe() {
+		cm.addRecipe(r1);
+		//R1 will be the recipe in slot 0, because it was the first (and only) one added.
+		cm.deleteRecipe(0);
+		assertEquals("Incorrect return value while deleting a recipe that was already deleted.",
+				"", cm.deleteRecipe(0)); //TODO This recipe was already deleted. Should it be null instead of ""?
+	}
+	
+	public void testEditRecipeReturnOldName() {
 		cm.addRecipe(r1);
 		String name = cm.editRecipe(0, r2);
 		assertEquals("",r1.getName(),name);
+	}
+	
+	public void testEditRecipeNewRecipeIsPlaced() {
+		cm.addRecipe(r1);
+		cm.editRecipe(0, r2);
 		Recipe[] arr = cm.getRecipes();
 		Recipe temp = arr[0];
 		assertEquals(r2.getName(), temp.getName());
@@ -147,21 +163,42 @@ public class CoffeeMakerTest extends TestCase {
 				"Coffee: 17\nMilk: 17\nSugar: 17\nChocolate: 17\n",cm.checkInventory());
 	}
 	
-	public void testMakeCoffee() {
+	public void testMakeCoffeeSuccess() {
 		cm.addRecipe(r1);
 		//Successful Transaction
 		assertEquals("Successful transaction was not completed.",25, cm.makeCoffee(0, 75));
+	}
+	
+	public void testMakeCoffeeNotEnoughPaid() {
+		cm.addRecipe(r1);
 		//User doesn't pay with enough money for a recipe.
 		assertEquals("User was able to pay with not enough money.",1,cm.makeCoffee(0, 1));
-		//User tries to pay for a recipe that was deleted.
-		cm.deleteRecipe(0);
+	}
+	
+	public void testMakeCoffeeThatDoesntExist() {
 		assertEquals("User was able to pay for deleted recipe.",75,cm.makeCoffee(0, 75));
-		//User tries to pay for a recipe that never existed.
-		assertEquals("User was able to pay for a recipe that doens't exist.",75,cm.makeCoffee(1, 75));
-		cm.addRecipe(r2);
-		//User attempts to pay, but not enough chocolate to make Mocha.
+	}
+	
+	public void testMakeCoffeeWithoutIngediants() {
+		cm.addRecipe(r1);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		cm.makeCoffee(0, 75);
+		//User attempts to pay, but not enough chocolate to make coffee.
 		assertEquals("User was able to pay when there wasn't enough chocolate to make the mocha.",
-				75, cm.makeCoffee(1, 75));
+				75, cm.makeCoffee(0, 75));
 	}
 	
 	public void testGetRecipes() {
