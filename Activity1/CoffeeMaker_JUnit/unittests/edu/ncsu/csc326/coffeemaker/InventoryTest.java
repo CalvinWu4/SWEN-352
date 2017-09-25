@@ -44,6 +44,10 @@ public class InventoryTest extends TestCase {
 	public void testGetChocolate() {
 		assertEquals("The inventory did not start with the default amount of chocolate.",default_amount,inventory.getChocolate());
 	}
+	
+	public void testGetChocolateNo() {
+		assertNotSame("The inventory start with the default amount of chocolate.",default_amount+1,inventory.getChocolate());
+	}
 
 	public void testSetPositiveChocolate() {
 		//Test with positive number
@@ -132,6 +136,10 @@ public class InventoryTest extends TestCase {
 	public void testGetCoffee() {
 		assertEquals("Incorrect default amount of coffee.", default_amount, inventory.getCoffee());
 	}
+	
+	public void testGetCoffeeNo() {
+		assertNotSame("The inventory start with the default amount of Coffee.",default_amount+1,inventory.getCoffee());
+	}
 
 	public void testSetPositiveCoffee() {
 		int new_amount = 10;
@@ -213,6 +221,10 @@ public class InventoryTest extends TestCase {
 	
 	public void testGetMilk() {
 		assertEquals("Wrong amount of Milk.", default_amount, inventory.getMilk());
+	}
+	
+	public void testGetMilkNo() {
+		assertNotSame("The inventory start with the default amount of Milk.",default_amount+1,inventory.getMilk());
 	}
 	
 	public void testSetMilkPos() {
@@ -375,43 +387,126 @@ public class InventoryTest extends TestCase {
 		assertTrue("Exception not thrown for adding a negative number instead of a positive number.", NegativeFlag);
 	}
 
-	public void testEnoughIngredientsTrue() {
+	public void testEnoughIngredientsCoffeeTrue() {
 		boolean isEnough;
 			
-			if(inventory.enoughIngredients(R1)) {
+			if((inventory.getCoffee() >= R1.getAmtCoffee()) && inventory.enoughIngredients(R1)) {
 		             isEnough = true;
 		        }
 			else {isEnough = false;}
 			assertTrue("You don't have enough ingredients", isEnough);
 	}
 	
-	public void testEnoughIngredientsFalse() {
+	public void testEnoughIngredientsCoffeeFalse() {
 		boolean isEnough;
 			
-			if(inventory.enoughIngredients(R2)) {
+			if((inventory.getCoffee() >= R1.getAmtCoffee()) && inventory.enoughIngredients(R2)) {
 		             isEnough = true;
 		        }
 			else {isEnough = false;}
 			assertFalse("You don't have enough ingredients", isEnough);
 	}
+	
+	public void testEnoughIngredientsMilkTrue() {
+		boolean isEnough;
+			
+			if((inventory.getMilk() >= R1.getAmtMilk()) && inventory.enoughIngredients(R1)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertTrue("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testEnoughIngredientsMilkFalse() {
+		boolean isEnough;
+			
+			if((inventory.getMilk() >= R1.getAmtMilk()) && inventory.enoughIngredients(R2)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertFalse("You don't have enough ingredients", isEnough);
+	}	
 
-	public void testUseIngredientsTrue() {
-		boolean NewR = true;
+	public void testEnoughIngredientsChocolateTrue() {
+		boolean isEnough;
+			
+			if((inventory.getChocolate() >= R1.getAmtChocolate()) && inventory.enoughIngredients(R1)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertTrue("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testEnoughIngredientsChocolateFalse() {
+		boolean isEnough;
+			
+			if((inventory.getChocolate() >= R1.getAmtChocolate()) && inventory.enoughIngredients(R2)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertFalse("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testEnoughIngredientsSugarTrue() {
+		boolean isEnough;
+			
+			if((inventory.getSugar() >= R1.getAmtSugar()) && inventory.enoughIngredients(R1)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertTrue("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testEnoughIngredientsSugarFalse() {
+		boolean isEnough;
+			
+			if((inventory.getSugar() >= R1.getAmtSugar()) && inventory.enoughIngredients(R2)) {
+		             isEnough = true;
+		        }
+			else {isEnough = false;}
+			assertFalse("You don't have enough ingredients", isEnough);
+	}
+	
+	public void testUseIngredientChocolateTrue() {
 		inventory.setChocolate(default_amount);
-		inventory.setCoffee(default_amount);
+		assertTrue(inventory.useIngredients(R1));
+	}
+	
+	public void testUseIngredientChocolateFalse() {
+		inventory.setChocolate(default_amount);
+		assertFalse(inventory.useIngredients(R2));	
+	}
+	
+	public void testUseIngredientMilkTrue() {
 		inventory.setMilk(default_amount);
+		assertTrue(inventory.useIngredients(R1));
+	}
+	
+	public void testUseIngredientMilkFalse() {
+		inventory.setMilk(default_amount);
+		assertFalse(inventory.useIngredients(R2));	
+	}
+
+	public void testUseIngredientCoffeeTrue() {
+		inventory.setCoffee(default_amount);
+		assertTrue(inventory.useIngredients(R1));
+	}
+	
+	public void testUseIngredientCoffeeFalse() {
+		inventory.setCoffee(default_amount);
+		assertFalse(inventory.useIngredients(R2));	
+	}
+	
+	public void testUseIngredientSugarTrue() {
 		inventory.setSugar(default_amount);
 		assertTrue(inventory.useIngredients(R1));
 	}
 	
-	public void testUseIngredientsFalse() {
-		inventory.setChocolate(default_amount);
-		inventory.setCoffee(default_amount);
-		inventory.setMilk(default_amount);
+	public void testUseIngredientSugarFalse() {
 		inventory.setSugar(default_amount);
 		assertFalse(inventory.useIngredients(R2));	
-		}
-
+	}
+	
 	public void testToStringTrue() {
 		assertEquals(inventory.toString(), ("Coffee: " +
 		inventory.getCoffee() + "\n" + "Milk: " +
