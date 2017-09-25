@@ -136,7 +136,7 @@ public class Recipe {
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Units of sugar must be a positive integer");
     	}
-		if (amtSugar > 0) {
+		if (amtSugar >= 0) {
 			this.amtSugar = amtSugar;
 		} else {
 			throw new RecipeException("Units of sugar must be a positive integer");
