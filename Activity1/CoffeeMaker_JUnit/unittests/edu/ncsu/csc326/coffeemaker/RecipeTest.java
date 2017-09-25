@@ -9,15 +9,20 @@ public class RecipeTest extends TestCase {
 
 
 	private Recipe recipe;
-	private int positive_amount = 1;
-	private int negative_amount = -1;
-	private int zero_amount = 0;
+
+	private static final int default_amount = 0;
+	private static final String default_name = "";
+
+	private static final int positive_amount = 1;
+	private static final int negative_amount = 0;
+	private static final int zero_amount = -1;
+	private static final String test_string = "test";
+
 
 	public void setUp() throws Exception {
 		recipe = new Recipe();
 		super.setUp();
 	}
-
 	// Helper function for getting int values from private fields in Recipe
 	public int getInt(String field){
 		int result = 999;
@@ -56,38 +61,16 @@ public class RecipeTest extends TestCase {
 
 	public void testRecipeConstructor() throws RecipeException {
 		//Testing the creation of a new recipe object
-		int default_amount = 0;
-		recipe = new Recipe();
-
-		Field field;
-		int testAmount = 0;
-		try {
-			field = recipe.getClass().getDeclaredField("amtChocolate");
-			field.setAccessible(true);
-			testAmount = 0 + field.getInt(recipe);
-			field = recipe.getClass().getDeclaredField("amtCoffee");
-			field.setAccessible(true);
-			testAmount = 0 + field.getInt(recipe);
-			field = recipe.getClass().getDeclaredField("amtMilk");
-			field.setAccessible(true);
-			testAmount = 0 + field.getInt(recipe);
-			field = recipe.getClass().getDeclaredField("amtSugar");
-			field.setAccessible(true);
-			testAmount = 0 + field.getInt(recipe);
-			field = recipe.getClass().getDeclaredField("price");
-			field.setAccessible(true);
-			testAmount = 0 + field.getInt(recipe);
-		} catch (NoSuchFieldException | SecurityException e2) {
-			e2.printStackTrace();
-			//Stop test if exception is thrown, as there is an error with the test.
-			assertTrue("Caught an No Such Field or Security exception.",false);
-		} catch (IllegalArgumentException | IllegalAccessException e1) {
-			e1.printStackTrace();
-			//Stop test if exception is thrown, as there is an error with the test.
-			assertTrue("Caught an illegal argument or illegal access exception.",false);
-		}
-
-		assertEquals("The amount of chocolate in the inventory is incorrect.",default_amount,testAmount);
+		assertEquals("Constructor set the incorrect name.",
+				getString("name"),default_name);
+		assertEquals("Constructor set the incorrect amount of chocolate.",
+				getInt("amtChocolate"),default_amount);
+		assertEquals("Constructor set the incorrect amount of milk.",
+				getInt("amtMilk"),default_amount);
+		assertEquals("Constructor set the incorrect amount of sugar.",
+				getInt("amtSugar"),default_amount);
+		assertEquals("Constructor set the incorrect price.",
+				getInt("price"),default_amount);
 	}
 
 	public void testGetAmtChocolate() {
