@@ -1,4 +1,8 @@
 .metadata/
+.recommenders/
+
 Activity1/CoffeeMaker_JUnit/.classpath
 Activity1/CoffeeMaker_JUnit/.project
 Activity1/CoffeeMaker_JUnit/bin/
+
+Activity2/.*
