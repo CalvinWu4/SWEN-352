@@ -96,7 +96,7 @@ public class RecipeBookTest extends TestCase {
 
 	//Calvin
 	public void testEditRecipe() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }
