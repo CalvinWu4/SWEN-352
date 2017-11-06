@@ -4,8 +4,8 @@ import junit.framework.TestCase;
 
 import java.lang.reflect.Field;
 
-import edu.ncsu.csc326.coffeemaker.Recipe;
-import edu.ncsu.csc326.coffeemaker.RecipeBook;
+import edu.ncsu.csc326.coffeemaker1.Recipe;
+import edu.ncsu.csc326.coffeemaker1.RecipeBook;
 
 public class RecipeBookTest extends TestCase {
 

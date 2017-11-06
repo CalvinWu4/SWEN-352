@@ -1,8 +1,8 @@
 package edu.ncsu.csc326.coffeemaker1;
 
-import edu.ncsu.csc326.coffeemaker.CoffeeMaker;
-import edu.ncsu.csc326.coffeemaker.Recipe;
-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+import edu.ncsu.csc326.coffeemaker1.CoffeeMaker;
+import edu.ncsu.csc326.coffeemaker1.Recipe;
+import edu.ncsu.csc326.coffeemaker1.exceptions.InventoryException;
 import junit.framework.TestCase;
 
 /**

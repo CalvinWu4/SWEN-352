@@ -1,7 +1,7 @@
 package edu.ncsu.csc326.coffeemaker1;
 
-import edu.ncsu.csc326.coffeemaker.Recipe;
-import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+import edu.ncsu.csc326.coffeemaker1.Recipe;
+import edu.ncsu.csc326.coffeemaker1.exceptions.RecipeException;
 import junit.framework.TestCase;
 
 import java.lang.reflect.Field;
