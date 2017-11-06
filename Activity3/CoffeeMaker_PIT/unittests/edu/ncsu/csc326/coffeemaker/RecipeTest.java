@@ -483,13 +483,13 @@ public class RecipeTest extends TestCase {
 	 * Test the hash code for a recipe.
 	 */
 	public void testHashCode() {
-		assertEquals(r1.hashCode(), (31 * 1 + r1.getName().hashCode()));
+		assertEquals(r1.hashCode(), (31 * 3 + r1.getName().hashCode()));
 	}
 	
 	/**
 	 * Test the hash code for a null recipe.
 	 */
 	public void testHashCodeNull() {
-		assertEquals(r4.hashCode(), 31);
+		assertEquals(r4.hashCode(), 93);
 	}
 }

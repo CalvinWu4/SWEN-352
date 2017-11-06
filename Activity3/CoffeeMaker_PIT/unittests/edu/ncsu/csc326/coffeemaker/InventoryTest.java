@@ -404,6 +404,15 @@ public class InventoryTest extends TestCase {
 		}
 	}
 	
+	public void testAddSugarZero() {
+		try {
+			inv.addSugar("0");
+			assertEquals(15, inv.getSugar());
+		} catch (InventoryException e) {
+			fail("InventoryException should not be thrown");
+		}
+	}
+	
 	/**
 	 * Test if the amount of chocolate being used is positive in the inventory.
 	 * @throws RecipeException
@@ -435,6 +444,26 @@ public class InventoryTest extends TestCase {
 		recipe.setAmtMilk("10");
 		inv.useIngredients(recipe);
 		assertEquals(15-10, inv.getMilk());
+	}
+	
+	/**
+	 * Test to see if too much milk can be user.
+	 * @throws RecipeException
+	 */
+	public void testUseTooMuchMilk() throws RecipeException {
+		recipe.setAmtMilk("20");
+		boolean result = inv.useIngredients(recipe);
+		assertFalse(result);
+	}
+	
+	/**
+	 * Test to see if too much milk can be user.
+	 * @throws RecipeException
+	 */
+	public void testUseEnoughMilk() throws RecipeException {
+		recipe.setAmtMilk("10");
+		boolean result = inv.useIngredients(recipe);
+		assertTrue(result);
 	}
 	
 	/**
@@ -546,6 +575,26 @@ public class InventoryTest extends TestCase {
 
 			boolean checkEnough = inv.enoughIngredients(recipe);
 			assertFalse(checkEnough);
+			
+		} catch(RecipeException e) {
+			fail("RecipeException should be thrown");
+		}
+	}
+	
+	/**
+	 * Test to see if there is enough ingredients in the inventory for the recipe.
+	 * Should fail since the recipe requires more than available in the inventory.
+	 */
+	public void testBarelyEnoughSugar() {
+		try {
+			recipe.setName("Recipe with barely enough inv ingredients");
+			recipe.setAmtSugar("15");
+			recipe.setAmtCoffee("15");
+			recipe.setAmtMilk("15");
+			recipe.setAmtChocolate("15");
+
+			boolean checkEnough = inv.enoughIngredients(recipe);
+			assertTrue(checkEnough);
 			
 		} catch(RecipeException e) {
 			fail("RecipeException should be thrown");
