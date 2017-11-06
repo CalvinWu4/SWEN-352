@@ -73,6 +73,7 @@ public class PersonTableModelTest extends TestCase {
     	assertEquals(0, v.size());
     	v.clear();
     	
+    	//FindBugs marks 17 as a bug, but it is purposeful so it won't be changed.
     	v = ptm.searchPersons(null, null, -1, null, new GregorianCalendar(2132, 17, 9));
     	assertEquals(0, v.size());
     	v.clear();

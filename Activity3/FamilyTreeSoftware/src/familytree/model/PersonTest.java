@@ -165,10 +165,12 @@ public class PersonTest extends TestCase {
      * such as marrying a sibling. 
      */
     public void testComplexRelationPreventer(){
-    	Person isanisa = new Person ("IsanIsa", "", false);
+    	//Removed as part of FindBugs check.
+    	//Person isanisa = new Person ("IsanIsa", "", false);
     	//Removed as Part of PMD check.
     	//Person isanaiti = new Person  ("Isanaiti", "", true);
-    	Person aidinnisa = new Person ("AidinIsa", "", false);
+    	//Removed as part of Findbugs check.
+    	//Person aidinnisa = new Person ("AidinIsa", "", false);
     	Person aidinnaiti = new Person  ("Aidinnaiti", "", true);
     	
     	Person isa = new Person ("isa", "", false);
