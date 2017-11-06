@@ -30,7 +30,8 @@ public class PersonTest extends TestCase {
      	Person mother2 = new Person ("2nd", "Mother2", true);
     	Person mother3 = new Person ("3rd", "Mother3", true);
     	
-    	Person child11 = new Person ("", "", true);
+    	//Added "final" declaration as recommended by PMD.
+    	final Person child11 = new Person ("", "", true);
     	Person child12 = new Person ("", "", true);
     	Person child21 = new Person ("", "", true);
     	Person child22 = new Person ("", "", true);
@@ -51,7 +52,9 @@ public class PersonTest extends TestCase {
 	    	mother2.addChild(child21);
 	    	mother2.addChild(child22);
 	    	mother2.addChild(child23);
-	    	assertEquals(3, mother2.getChildren().size());
+	    	//Fixed Law Of Demeter: Method Chain Call as recommended by PMD.
+	    	final Vector childernOfMother2 = mother2.getChildren();
+	    	assertEquals(3, childernOfMother2.size());
 	    	assertEquals(0, mother3.getChildren().size());
 	    	
 	    	assertEquals(3, mother2.getChildren().size());
@@ -68,6 +71,9 @@ public class PersonTest extends TestCase {
      	Person father1 = new Person ("Mikki", "Hiiri", false);
     	Person son1 = new Person ("Mortti", "Hiiri", false);	
     	Person daughter1 = new Person ("Liinu", "Hiiri", true);
+    	
+    	int count_exceptions = 0;
+    	
     	try {
 	    	mother1.addChild(son1);
 	    	mother1.addChild(daughter1);
@@ -82,41 +88,70 @@ public class PersonTest extends TestCase {
     	try {
 	    	mother1.addChild(son1);
 	    	fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		mother1.addSpouse(father1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
 		//Relation with itself
 		try {
     		mother1.addChild(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		mother1.addSpouse(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	//Relation already through other type of realtionships
     	try {
     		mother1.addSpouse(son1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		son1.addSpouse(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		son1.addChild(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		father1.addChild(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
     	try {
     		daughter1.addChild(mother1);
     		fail("We should have AddRelationException"); 
-    	}catch (AddRelationException e){}
+    	}catch (AddRelationException e){
+    		//Added to fill catch block as recommended by PMD.
+    		count_exceptions++;
+    	}
+    	
+    	assertEquals(count_exceptions, 9);
     	
     	Vector relationshipsMother = mother1.getRelationships();
     	for (Iterator iteratorMom = relationshipsMother.iterator(); iteratorMom.hasNext();){
@@ -124,9 +159,15 @@ public class PersonTest extends TestCase {
     		
     	}
     }
+    
+    /**
+     * Check to make sure relationships that are not allowed cannot be formed,
+     * such as marrying a sibling. 
+     */
     public void testComplexRelationPreventer(){
     	Person isanisa = new Person ("IsanIsa", "", false);
-    	Person isanaiti = new Person  ("Isanaiti", "", true);
+    	//Removed as Part of PMD check.
+    	//Person isanaiti = new Person  ("Isanaiti", "", true);
     	Person aidinnisa = new Person ("AidinIsa", "", false);
     	Person aidinnaiti = new Person  ("Aidinnaiti", "", true);
     	
