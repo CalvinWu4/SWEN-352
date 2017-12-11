@@ -6,7 +6,7 @@ import org.junit.runner.notification.Failure;
 
 public class CoffeeMakerTestRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(CoffeeMakerTest.testMakeCoffee.class);
+        Result result = JUnitCore.runClasses(CoffeeMakerTest.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
