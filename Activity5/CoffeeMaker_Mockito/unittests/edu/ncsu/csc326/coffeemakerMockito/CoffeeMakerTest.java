@@ -38,7 +38,8 @@ public class CoffeeMakerTest{
 
 	//Set up for r1
 	r1 = mock(Recipe.class);
-	r1.setName("Coffee");
+	//r1.setName("Coffee");
+	when(r1.getName()).thenReturn("Coffee");
 	r1.setAmtChocolate("0");
 	r1.setAmtCoffee("3");
 	r1.setAmtMilk("1");
