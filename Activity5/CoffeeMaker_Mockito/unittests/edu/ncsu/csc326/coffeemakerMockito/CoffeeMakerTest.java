@@ -83,12 +83,12 @@ public class CoffeeMakerTest{
 	}
 
 	@Test
-	public void testAddInventoryException() {
+	public void testAddInventoryException() throws InventoryException{
 		try {
 			cm.addInventory("4", "-1", "asdf", "3");
+		}
+		catch(InventoryException ie){
 			fail("InventoryException should be thrown");
-		} catch (InventoryException e) {
-			//success if thrown
 		}
 	}
 
